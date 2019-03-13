@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="icn.ico" >
+<title>MIKEY WINSOR</title>
+<style type="text/css">
+body {
+	background-color:#C8C8C8;}
+body,td,th {
+	color: #333333;
+	font-size: 16px;
+	font-family: "Century Gothic";
+}
+#top {
+	position: fixed;
+    top: 0px;
+	left:0px;
+	width:400px;
+	height:40px;
+	z-index:1;
+	background: rgba(60, 60, 60, .6);}
+a:link {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+a:hover {
+	text-decoration: none;
+	color: #CCC;
+}
+a:active {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+.frame{box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.22);
+text-align:center;}
+strong {
+	font-size:18px;
+	font-style:normal;}
+em {
+	font-size:15px;
+	font-style:italic;}
+.nfo {font-size:17px;}
+h1 {color:#FFF;}
+.h{cursor:pointer}
+
+#dd {
+	position:absolute;
+	width:600px;
+	height:600px;
+	z-index:1;
+	left: 10px;
+	top: 44px;
+	text-align:center;
+}
+</style>
+<script type="text/javascript" src="jsm.js" ></script>
+<script type="text/javascript">
+function post(){	
+	ror[pos]()
+	document.getElementById("dd").innerHTML += "<br><br><img max-height:100% max-width:100% src='paintings/" + loc + ".jpg' height=100% class='frame' />";
+	document.getElementById("dd").innerHTML += "<br><br><strong>" + title + "</strong>" + "<br>" +  specs + "</em small><br><br><br><br><br><br>";
+	pos++;
+	if (pos<=11){post();}
+	if (pos==12){pos++;document.getElementById("dd").innerHTML += "<br><br> (c) 2017 mikey winsor"};
+	}
+
+</script>
+
+</head>
+
+<body>
+<div id="dd">
+  <div align="center"></div>
+</div>
+<body onload="post()">
+<p>&nbsp;</p>
+<div id="topfx2">
+</div>
+<div id="topfx1">
+</div>
+<div id="top">
+  <table width="700" border="0" cellspacing="4" cellpadding="2">
+    <tr>
+      <td width="270"><b>&nbsp; &nbsp; <span ><font color="#EEEEEE">M I K E Y &nbsp; W I N S O R</font></span></b></td>
+      <td width="19">&nbsp;</td>
+      <td width="31">&nbsp;</td>
+      <td width="360"><font color="#EEEEEE"><a href="info.html">info</a></font></td>
+    </tr>
+  </table>
+</div>
+<br />
+<br />
+</body>
+</html>

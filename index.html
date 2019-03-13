@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="icn.ico" >
+<title>MIKEY WINSOR</title>
+<style type="text/css">
+body {
+	background-color:#FFFFFF;
+}
+body,td,th {
+	color: #333333;
+	font-size: 20px;
+	font-family: "Century Gothic";}
+#top {
+	position: fixed;
+    top: 0px;
+	left:0px;
+	width:100%;
+	height:48px;
+	z-index:1;
+	background: rgba(60, 60, 60, .1);}
+#topfx1 {
+	position: fixed;
+    top: 0;
+	left:0px;
+	width:100%;
+	height:40px;
+	z-index:1;
+	background: rgba(60, 60, 60, .2);}
+#topfx2 {
+	position: fixed;
+    top: 0;
+	left:0px;
+	width:100%;
+	height:33px;
+	z-index:1;
+	background: rgba(60, 60, 60, .5);}
+#frame {
+	position:fixed;
+	width: 68%;
+	height: 74%;
+	left: 16%;
+	top: 8%;
+	z-index:5;
+	background-color:#333333;
+	text-align: center;
+	visibility: hidden;
+	border-color:#666600;
+	border-width:thick;
+	background-color:#EEEEEE;}
+#pr {
+	position: fixed;
+	top:40%;
+	left:2.5%;
+	border-width:medium;
+	width:66px;
+	height:70px;
+	z-index:2;
+	text-align: center;
+	vertical-align:top;
+	visibility:hidden;}
+#nx {
+	position: fixed;
+	top:40%;
+	right:2.5%;
+	border-width:medium;
+	width:66px;
+	height:70px;
+	z-index:2;
+	text-align: center;
+	vertical-align:top;}
+a:link {
+	color: #66666;
+	text-decoration: none;}
+a:visited {text-decoration: none;	color: #666666;}
+a:hover {text-decoration: none;	color: #600;}
+a:active {text-decoration: none;	color: #E4E6DF;}
+.frame{box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.22);}
+strong {
+	font-size:18px;
+	font-style:normal;}
+em {
+	font-size:15px;
+	font-style:italic;}
+.nfo {font-size:17px;}
+h1 {color:#FFF;}
+.h{cursor:pointer}
+#PV {
+	position:fixed;
+	width: 80%;
+	height: 68%;
+	left: 10%;
+	top: 15%;
+	z-index:2;
+	text-align:center;}
+#bottom {
+	position: fixed;
+	bottom:8px;
+	left:0px;
+	border-color:#666666;
+	border-width:medium;
+	width:100%;
+	height:35px;
+	z-index:1;
+	text-align:center;
+	background: rgba(240, 240, 240, .8);}
+#preload {
+	position:fixed;
+	width: 10%;
+	height: 10%;
+	right: 0px;
+	top: 18%;
+	text-align:center;
+	z-index:1;
+	visibility:hidden;
+}
+</style>
+<script type="text/javascript">
+if (typeof window.orientation !== 'undefined') {window.location.href = "mobile.html";}
+</script>
+<script type="text/javascript" src="js.js">
+</script>
+</head>
+
+<body>
+<div id="PV"></div>
+<body onload="pageload()">
+<p>&nbsp;</p>
+<div id="pr"><a href="#" onclick="pr();"><img src="l.png" width="66" height="66" class="h"/></a></div>
+<div id="nx"><a href="#" onclick="nx();"><img src="r.png" width="66" height="66" class="h"/></a></div>
+<div id="topfx2">
+</div>
+<div id="topfx1">
+</div>
+<div id="top">
+  <table width="700" border="0" cellspacing="4" cellpadding="0">
+    <tr>
+      <td width="270"><b>&nbsp; &nbsp; <span ><font color="#EEEEEE">M I K E Y &nbsp; W I N S O R</font></span></b></td>
+      <td width="19">&nbsp;</td>
+      <td width="31">&nbsp;</td>
+      <td width="360"><a href="#" onclick="infoclick();"><font class="nfo" color="#EEEEEE">info</font></a></td>
+    </tr>
+  </table>
+</div>
+<div id="frame">
+</div>
+<div id="bottom"> 
+  <div align="center">
+</div>
+</div>
+<div id="preload"></div>
+</body>
+</html>
