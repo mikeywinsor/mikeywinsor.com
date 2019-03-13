@@ -6,42 +6,43 @@
 <title>MIKEY WINSOR</title>
 <style type="text/css">
 body {
-	background-color:#FFFFFF;
+	background-color:#E9E9E9;
 }
 body,td,th {
-	color: #333333;
+	color: #666666;
 	font-size: 20px;
-	font-family: "Century Gothic";}
+	font-family:"Century Gothic";
+}
 #top {
 	position: fixed;
     top: 0px;
 	left:0px;
 	width:100%;
-	height:48px;
+	height:68px;
 	z-index:1;
-	background: rgba(60, 60, 60, .1);}
+	background: rgba(255,255,255,.8);}
 #topfx1 {
 	position: fixed;
     top: 0;
 	left:0px;
 	width:100%;
-	height:40px;
+	height:72px;
 	z-index:1;
-	background: rgba(60, 60, 60, .2);}
+	background: rgba(255, 255, 255, .2);}
 #topfx2 {
 	position: fixed;
     top: 0;
 	left:0px;
 	width:100%;
-	height:33px;
+	height:76px;
 	z-index:1;
-	background: rgba(60, 60, 60, .5);}
+	background: rgba(255, 255, 255, .05);}
 #frame {
 	position:fixed;
 	width: 68%;
-	height: 74%;
+	height: 68%;
 	left: 16%;
-	top: 8%;
+	top: 80px;
 	z-index:5;
 	background-color:#333333;
 	text-align: center;
@@ -49,62 +50,50 @@ body,td,th {
 	border-color:#666600;
 	border-width:thick;
 	background-color:#EEEEEE;}
-#pr {
-	position: fixed;
-	top:40%;
-	left:2.5%;
+#navi {
+	position: absolute;
+	top:130px;
+	left:6px;
 	border-width:medium;
-	width:66px;
+	width:200px;
 	height:70px;
 	z-index:2;
 	text-align: center;
 	vertical-align:top;
-	visibility:hidden;}
-#nx {
-	position: fixed;
-	top:40%;
-	right:2.5%;
-	border-width:medium;
-	width:66px;
-	height:70px;
-	z-index:2;
-	text-align: center;
-	vertical-align:top;}
+	visibility:visible;}
 a:link {
 	color: #66666;
 	text-decoration: none;}
 a:visited {text-decoration: none;	color: #666666;}
 a:hover {text-decoration: none;	color: #600;}
 a:active {text-decoration: none;	color: #E4E6DF;}
-.frame{box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.22);}
+.frame{box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);}
 strong {
-	font-size:18px;
+	font-size:16px;
 	font-style:normal;}
-em {
-	font-size:15px;
-	font-style:italic;}
+specs {
+	font-size:14px;
+	}
 .nfo {font-size:17px;}
 h1 {color:#FFF;}
 .h{cursor:pointer}
 #PV {
-	position:fixed;
-	width: 80%;
-	height: 68%;
-	left: 10%;
-	top: 15%;
+	position:absolute;
+	width: 700px;
+	height: 600px;
+	left: 300px;
+	top: 120px;
 	z-index:2;
 	text-align:center;}
-#bottom {
-	position: fixed;
-	bottom:8px;
-	left:0px;
-	border-color:#666666;
-	border-width:medium;
-	width:100%;
-	height:35px;
+#about {
+	position: absolute;
+	top:250px;
+	left:20px;
+	width:280px;
+	height:80px;
 	z-index:1;
-	text-align:center;
-	background: rgba(240, 240, 240, .8);}
+	text-align:left;
+	}
 #preload {
 	position:fixed;
 	width: 10%;
@@ -127,25 +116,23 @@ if (typeof window.orientation !== 'undefined') {window.location.href = "mobile.h
 <div id="PV"></div>
 <body onload="pageload()">
 <p>&nbsp;</p>
-<div id="pr"><a href="#" onclick="pr();"><img src="l.png" width="66" height="66" class="h"/></a></div>
-<div id="nx"><a href="#" onclick="nx();"><img src="r.png" width="66" height="66" class="h"/></a></div>
+<div id="navi"><a href="#" onclick="pr();"><img src="arrow-left.png" width="60" height="60" class="h"/></a> <img src="empty-60.png" width="60" height="60" /> <a href="#" onclick="nx();"><img src="arrow-right.png" width="60" height="60" class="h"/></a></div>
 <div id="topfx2">
 </div>
 <div id="topfx1">
 </div>
 <div id="top">
-  <table width="700" border="0" cellspacing="4" cellpadding="0">
+  <table width="638" border="0" cellspacing="4" cellpadding="0">
     <tr>
-      <td width="270"><b>&nbsp; &nbsp; <span ><font color="#EEEEEE">M I K E Y &nbsp; W I N S O R</font></span></b></td>
-      <td width="19">&nbsp;</td>
-      <td width="31">&nbsp;</td>
-      <td width="360"><a href="#" onclick="infoclick();"><font class="nfo" color="#EEEEEE">info</font></a></td>
+      <td width="124">&nbsp;</td>
+      <td width="404"><b>&nbsp; &nbsp; <span ><font size="+4">mikey winsor</font></span></b></td>
+      <td width="94"><a href="#" onclick="infoclick();"><font class="nfo">info</font></a></td>
     </tr>
   </table>
 </div>
 <div id="frame">
 </div>
-<div id="bottom"> 
+<div id="about"> 
   <div align="center">
 </div>
 </div>
