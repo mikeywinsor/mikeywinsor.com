@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+
+
+<title>Splatoon 2 Auto Draw</title>
+<style type="text/css">
+#infobox {
+	position:absolute;
+	width:400px;
+	margin-left:200px;
+	left:50%;
+	height:88px;
+	z-index:1;
+	top: 18px;
+	background-color:#FFC;
+}
+#imagebox {
+	position:absolute;
+	width:100%;
+	text-align:center;
+	height:115px;
+	z-index:2;
+	left: 16px;
+	top: 88px;
+}
+body,td,th {
+	font-size: 18px;
+	text-align:center;
+}
+#txtbox {
+	position:absolute;
+	width:200px;
+	height:115px;
+	z-index:3;
+	left: 30px;
+	top: 479px;
+}
+</style>
+</head>
+<body bgcolor="#EDE4E7">
+<label><strong>U P L O A D _ _yur _ _ I M A G E :</strong></label>
+<br/>
+1. 
+<input type="file" id="imageLoader" name="imageLoader"/>
+
+<div id="infobox">infos:</div>
+<div id="imagebox">
+<canvas id="imageCanvas"></canvas></div>
+<p>&nbsp; </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+  <script type="text/javascript">
+
+var imageLoader = document.getElementById('imageLoader');
+    imageLoader.addEventListener('change', handleImage, false);
+var canvas = document.getElementById('imageCanvas');
+var ctx = canvas.getContext('2d');
+
+function handleImage(e){
+    var reader = new FileReader();
+    reader.onload = function(event){
+        var img = new Image();
+        img.onload = function(){
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img,0,0);
+			writeinfobox();
+			cleartxt();
+        }
+        img.src = event.target.result;
+    }
+    reader.readAsDataURL(e.target.files[0]);     
+}
+
+function writeinfobox(){
+	var wpx = canvas.width;
+	var hpx = canvas.height;
+	document.getElementById('infobox').innerHTML= "width: " + wpx + '     ' + "height: " + hpx;
+	if (wpx==320 && hpx==120){
+		document.getElementById('infobox').style.backgroundColor = "white";
+		} else {
+		document.getElementById('infobox').innerHTML= "width: " + wpx + '     ' + "height: " + hpx + "<br> max size 320x120<br>smaller images will work";
+		if (wpx>320 || hpx>120){
+		document.getElementById('infobox').style.backgroundColor = "red";}}
+}
+  </script>
+  <script type="text/javascript">
+	
+	var skips = 0;	
+	
+function cleartxt(){
+	skips=1;
+	document.getElementById('txtarea').innerHTML= "";
+	}
+function readpixel(){
+	var c = ctx.getImageData(x, y, 1, 1).data;
+	if (c[1]>=140){p=0}else{p=1};
+	}
+
+-->	Main compiler, 0 = pen down, if>0, skip positions until next pen down
+--> run left to right, down one row, right to left, down one row, repeat.
+function maketxt(){
+	var wpx = canvas.width;
+	var hpx = canvas.height;
+	x = 0;
+	y = 0;
+	document.getElementById('txtarea').innerHTML+=wpx+"\n"+hpx+"\n";
+	
+	while(y<hpx){
+	
+	while(x<wpx){
+	readpixel();
+	if (p==1){document.getElementById('txtarea').innerHTML+="0"+"\n";skips=0;}
+	else{document.getElementById('txtarea').innerHTML+="1"+"\n";}
+	x++;
+	}
+	x--;
+	y++;
+	while(x>=0){
+	readpixel();
+	if (p==1){document.getElementById('txtarea').innerHTML+="0"+"\n";skips=0;}
+	else{document.getElementById('txtarea').innerHTML+="1"+"\n";}
+	x--;
+	}
+	x++;
+	y++;
+	}
+	document.getElementById('txtarea').innerHTML+="COMPLETE";
+}
+function makeprev(){
+
+	var wpx = canvas.width;
+	var hpx = canvas.height;
+	x = 0;
+	y = 0;	
+	while(y<hpx){
+	while(x<wpx){
+	readpixel();
+	if (p==0){ctx.fillStyle = "white";ctx.fillRect(x,y,1,1);}
+	else{ctx.fillStyle = "black";ctx.fillRect(x,y,1,1);}
+	x++;
+	}
+	x--;
+	y++;
+	while(x>=0){
+	readpixel();
+	if (p==0){ctx.fillStyle = "white";ctx.fillRect(x,y,1,1);}
+	else{ctx.fillStyle = "black";ctx.fillRect(x,y,1,1);}
+	x--;
+	}
+	x++;
+	y++;
+	}
+}
+  </script>  
+</p>
+<p>&nbsp;</p>
+2.
+<button type="button" onclick="maketxt();">Convert Image into TXT</button> 
+<xsmall> preview how a color image will look:</xsmall> 
+<button type="button" onclick="makeprev();">Preview Image B+W version</button> 
+<button type="button" onclick="cleartxt();">Clear TXT</button>
+<br /><br />
+<form id="form1" name="form1" method="post" action="">
+  <p>
+    <textarea name="txtarea" id="txtarea" cols="45" rows="5"></textarea>
+  </p>
+</form>
+
+3.
+<button onclick="saveTextAsFile()">DOWNLOAD .rtf</button>
+<td><p><br />
+  Larger images will slow your browser, and give you this warning. Click wait and be patient. I had best results with Chrome.<br />
+  <img src="tutorial-error-chrome-Image2.jpg" width="542" height="232" /><br />
+  <script type="text/javascript">
+ 
+function saveTextAsFile()
+{
+    var textToSave = document.getElementById("txtarea").value;
+	textToSave = textToSave.replace(/\n/g, "\r\n");
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/javascript"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+ 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = "drawEV3screen.rtf";
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+}
+ 
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
+}
+ 
+function loadFileAsText()
+{
+    var fileToLoad = document.getElementById("fileToLoad").files[0];
+ 
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) 
+    {
+        var textFromFileLoaded = fileLoadedEvent.target.result;
+        document.getElementById("inputTextToSave").value = textFromFileLoaded;
+    };
+    fileReader.readAsText(fileToLoad, "UTF-8");
+}
+ 
+    </script>
+  
+  
+  </p>
+  <p>After you save your .rtf file:<br />
+    1. Download and open file <a href="AutoDraw_Splat2.ev3">AutoDraw_Splat2.ev3</a> <br />
+    2. Ctrl+I  (Splatoon2_AutoDraw) folder, click download<br />
+    3. 
+    Select (drawEV3screen.rtf) from above  (most likely downloads folder)
+  </p>
+  <p><img src="tutrrrr1.jpg" width="661" height="410" /></p>
+  <p><br />
+    4. Press Download to Download to your ev3 Brick
+  </p>
+</body>
+</html>
