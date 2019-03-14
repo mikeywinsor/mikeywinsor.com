@@ -6,94 +6,137 @@
 <title>MIKEY WINSOR</title>
 <style type="text/css">
 body {
-	background-color:#C8C8C8;}
+	background-color:#E9E9E9;
+}
 body,td,th {
-	color: #333333;
-	font-size: 16px;
-	font-family: "Century Gothic";
+	color: #666666;
+	font-size: 20px;
+	font-family:"Century Gothic";
 }
 #top {
 	position: fixed;
     top: 0px;
 	left:0px;
-	width:400px;
-	height:40px;
+	width:100%;
+	height:68px;
 	z-index:1;
-	background: rgba(60, 60, 60, .6);}
+	background: rgba(255,255,255,.8);}
+#topfx1 {
+	position: fixed;
+    top: 0;
+	left:0px;
+	width:100%;
+	height:72px;
+	z-index:1;
+	background: rgba(255, 255, 255, .2);}
+#topfx2 {
+	position: fixed;
+    top: 0;
+	left:0px;
+	width:100%;
+	height:76px;
+	z-index:1;
+	background: rgba(255, 255, 255, .05);}
+#frame {
+	position:fixed;
+	width: 68%;
+	height: 68%;
+	left: 16%;
+	top: 80px;
+	z-index:5;
+	background-color:#333333;
+	text-align: center;
+	visibility: hidden;
+	border-color:#666600;
+	border-width:thick;
+	background-color:#EEEEEE;}
+#navi {
+	position: absolute;
+	top:580px;
+	left:35%;
+	border-width:medium;
+	width:200px;
+	height:70px;
+	z-index:2;
+	text-align: center;
+	vertical-align:top;
+	visibility:visible;}
 a:link {
-	color: #FFFFFF;
-	text-decoration: none;
-}
-a:visited {
-	text-decoration: none;
-	color: #FFFFFF;
-}
-a:hover {
-	text-decoration: none;
-	color: #CCC;
-}
-a:active {
-	text-decoration: none;
-	color: #FFFFFF;
-}
-.frame{box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.22);
-text-align:center;}
+	color: #66666;
+	text-decoration: none;}
+a:visited {text-decoration: none;	color: #666666;}
+a:hover {text-decoration: none;	color: #600;}
+a:active {text-decoration: none;	color: #E4E6DF;}
+.frame{box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);}
 strong {
-	font-size:18px;
+	font-size:16px;
 	font-style:normal;}
-em {
-	font-size:15px;
-	font-style:italic;}
+specs {
+	font-size:14px;
+	}
 .nfo {font-size:17px;}
 h1 {color:#FFF;}
 .h{cursor:pointer}
-
-#dd {
+#PV {
 	position:absolute;
-	width:600px;
-	height:600px;
-	z-index:1;
-	left: 10px;
-	top: 44px;
+	width: 600px;
+	height:400px;
+	left: 0%;
+	top: 110px;
+	z-index:2;
 	text-align:center;
+	}
+#about {
+	position: absolute;
+	top:520px;
+	left:20px;
+	width:280px;
+	height:80px;
+	z-index:1;
+	text-align:left;
+	}
+#preload {
+	position:fixed;
+	width: 10%;
+	height: 10%;
+	right: 0px;
+	top: 18%;
+	text-align:center;
+	z-index:1;
+	visibility:hidden;
 }
 </style>
-<script type="text/javascript" src="jsm.js" ></script>
 <script type="text/javascript">
-function post(){	
-	ror[pos]()
-	document.getElementById("dd").innerHTML += "<br><br><img max-height:100% max-width:100% src='paintings/" + loc + ".jpg' height=100% class='frame' />";
-	document.getElementById("dd").innerHTML += "<br><br><strong>" + title + "</strong>" + "<br>" +  specs + "</em small><br><br><br><br><br><br>";
-	pos++;
-	if (pos<=11){post();}
-	if (pos==12){pos++;document.getElementById("dd").innerHTML += "<br><br> (c) 2017 mikey winsor"};
-	}
-
+//if (typeof window.orientation !== 'undefined') {window.location.href = "mobile.html";}
 </script>
-
+<script type="text/javascript" src="js.js">
+</script>
 </head>
 
 <body>
-<div id="dd">
-  <div align="center"></div>
-</div>
-<body onload="post()">
+<div id="PV" align="center"></div>
+<body onload="pageload()">
 <p>&nbsp;</p>
+<div id="navi"><a href="#" onclick="pr();"><img src="arrow-left.png" width="60" height="60" class="h"/></a> <img src="empty-60.png" width="60" height="60" /> <a href="#" onclick="nx();"><img src="arrow-right.png" width="60" height="60" class="h"/></a></div>
 <div id="topfx2">
 </div>
 <div id="topfx1">
 </div>
 <div id="top">
-  <table width="700" border="0" cellspacing="4" cellpadding="2">
+  <table width="600" border="0" cellspacing="4" cellpadding="0">
     <tr>
-      <td width="270"><b>&nbsp; &nbsp; <span ><font color="#EEEEEE">M I K E Y &nbsp; W I N S O R</font></span></b></td>
-      <td width="19">&nbsp;</td>
-      <td width="31">&nbsp;</td>
-      <td width="360"><font color="#EEEEEE"><a href="info.html">info</a></font></td>
+      <td width="100">&nbsp;</td>
+      <td width="400"><b>&nbsp; &nbsp; <span ><font size="+4">mikey winsor</font></span></b></td>
+      <td width="100"><a href="info.html"><font class="nfo">info</font></a></td>
     </tr>
   </table>
 </div>
-<br />
-<br />
+<div id="frame">
+</div>
+<div id="about"> 
+  <div >
+</div>
+</div>
+<div id="preload"></div>
 </body>
 </html>
