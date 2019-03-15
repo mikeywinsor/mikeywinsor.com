@@ -7,7 +7,34 @@ function pageload(){
 
 <!-- Paintings            -->
 <!-- Info to Variables    -->
-
+function akid(){
+	title="A Kid ";
+	specs="30 x 24 in, oil on canvas, 2018";
+	loc="a_kid";}
+function anothersummerdone(){
+	title="Another Summer Done ";
+	specs="36 x 24 in, oil on canvas, 2018";
+	loc="another_summer_done";}
+function enroutetobreakfast(){
+	title="En Route to Breakfast ";
+	specs="48 x 36 in, oil on canvas, 2018";
+	loc="en_route_to_breakfast";}
+function fromthebalcony(){
+	title="From the Balcony ";
+	specs="36 x 24 in, oil on canvas, 2019";
+	loc="from_the_balcony";}
+function lunarzenith(){
+	title="Lunar Zenith ";
+	specs="24 x 18 in, oil on canvas, 2019";
+	loc="lunar_zenith";}
+function turnaleaf(){
+	title="Turn a Leaf ";
+	specs="36 x 24 in, oil on canvas, 2018";
+	loc="turn_a_leaf";}
+function waterfall(){
+	title="Waterfall ";
+	specs="36 x 24 in, oil on canvas, 2018";
+	loc="waterfall";}
 function intravenous(){
 	title="Intravenous ";
 	specs="18 x 24 in, oil on canvas, 2013";
@@ -118,11 +145,11 @@ function happybirthday(){
 	loc="happy_birthday";}			
 	
 <!--    Painting Random Order         -->
-ord = [afeast,deepinthenight,edgesofhistory,gatheringclouds,onsynth,somethingemerges,itabides,happybirthday,eatyou,intravenous,plantinacup,sweetsweetnectar,aspring,bedtimestory,mudflap,takenbynotus,taxes,cityonisland,elephantsatriver,lasthikeofsummer,havesomemore,cleansheets,crystalballs,aplacetorest,oceanmeetearth,iceontheburn];
+ord = [enroutetobreakfast,anothersummerdone,fromthebalcony,lunarzenith,turnaleaf,waterfall,thesunandthemoon,afeast,deepinthenight,edgesofhistory,gatheringclouds,onsynth,somethingemerges,itabides,happybirthday,eatyou,intravenous,plantinacup,sweetsweetnectar,aspring,bedtimestory,mudflap,takenbynotus,taxes,cityonisland,elephantsatriver,lasthikeofsummer,havesomemore,cleansheets,crystalballs,aplacetorest,oceanmeetearth,iceontheburn];
 var n = ord.length;
 var stp = [n]
   // Take values from ord (images in order) and place them in a random order into a new order in ror (random order)
-var ror = [thesunandthemoon];
+var ror = [akid];
  for ( var i = 0; i < n-1; i++ ) {
     ror.push(ord.splice(Math.floor(Math.random()*ord.length),1)[0]);
   }
