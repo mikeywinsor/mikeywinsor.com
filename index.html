@@ -6,7 +6,7 @@
 <title>MIKEY WINSOR</title>
 <style type="text/css">
 body {
-	background-color:#E9E9E9;
+	background-color:#FFF;
 }
 body,td,th {
 	color: #666666;
@@ -21,22 +21,6 @@ body,td,th {
 	height:68px;
 	z-index:1;
 	background: rgba(255,255,255,.8);}
-#topfx1 {
-	position: fixed;
-    top: 0;
-	left:0px;
-	width:100%;
-	height:72px;
-	z-index:1;
-	background: rgba(255, 255, 255, .2);}
-#topfx2 {
-	position: fixed;
-    top: 0;
-	left:0px;
-	width:100%;
-	height:76px;
-	z-index:1;
-	background: rgba(255, 255, 255, .05);}
 #frame {
 	position:fixed;
 	width: 68%;
@@ -51,9 +35,9 @@ body,td,th {
 	border-width:thick;
 	background-color:#EEEEEE;}
 #navi {
-	position: absolute;
-	top:130px;
-	left:6px;
+	position: fixed;
+	bottom:20px;
+	left:300px;
 	border-width:medium;
 	width:200px;
 	height:70px;
@@ -74,7 +58,7 @@ strong {
 specs {
 	font-size:14px;
 	}
-.nfo {font-size:17px;}
+.nfo {font-size:17px; vertical-align: bottom;}
 h1 {color:#FFF;}
 .h{cursor:pointer}
 #PV {
@@ -84,7 +68,9 @@ h1 {color:#FFF;}
 	left: 300px;
 	top: 120px;
 	z-index:2;
-	text-align:center;}
+	text-align:center;
+	visibility: visible;
+}
 #about {
 	position: absolute;
 	top:250px;
@@ -93,6 +79,7 @@ h1 {color:#FFF;}
 	height:80px;
 	z-index:1;
 	text-align:left;
+	visibility: visible;
 	}
 #preload {
 	position:fixed;
@@ -117,16 +104,12 @@ if (typeof window.orientation !== 'undefined') {window.location.href = "mobile.h
 <body onload="pageload()">
 <p>&nbsp;</p>
 <div id="navi"><a href="#" onclick="pr();"><img src="arrow-left.png" width="60" height="60" class="h"/></a> <img src="empty-60.png" width="60" height="60" /> <a href="#" onclick="nx();"><img src="arrow-right.png" width="60" height="60" class="h"/></a></div>
-<div id="topfx2">
-</div>
-<div id="topfx1">
-</div>
 <div id="top">
-  <table width="638" border="0" cellspacing="4" cellpadding="0">
+  <table width="508" border="0" cellspacing="4" cellpadding="0">
     <tr>
-      <td width="124">&nbsp;</td>
-      <td width="404"><b>&nbsp; &nbsp; <span ><font size="+4">mikey winsor</font></span></b></td>
-      <td width="94"><a href="#" onclick="infoclick();"><font class="nfo">info</font></a></td>
+      <td width="15">&nbsp;</td>
+      <td width="427"><b>&nbsp;<span ><font size="+4">mikey winsor</font></span></b></td>
+      <td width="174"><a href="#" onclick="infoclick();"><font class="nfo">info</font></a></td>
     </tr>
   </table>
 </div>
