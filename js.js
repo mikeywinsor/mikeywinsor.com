@@ -174,7 +174,7 @@ function blush(){
 function anopenwindow(){
 	title="An Open Window";
 	specs="oil on canvas,</br>36 x 24 in, 2019";
-	loc="head_in_the_clouds";}
+	loc="an_open_window";}
 <!--    Painting Random Order         -->
 ord = [enroutetobreakfast,anothersummerdone,fromthebalcony,lunarzenith,turnaleaf,waterfall,thesunandthemoon,afeast,deepinthenight,edgesofhistory,gatheringclouds,onsynth,somethingemerges,itabides,happybirthday,grapplecoilandbite,eatyou,intravenous,plantinacup,sweetsweetnectar,aspring,bedtimestory,mudflap,takenbynotus,taxes,cityonisland,elephantsatriver,lasthikeofsummer,havesomemore,cleansheets,crystalballs,aplacetorest,oceanmeetearth,iceontheburn,akid,coralontherocks,deepsunlight,upthere,blush,anopenwindow];
 var n = ord.length;
