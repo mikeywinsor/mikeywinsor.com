@@ -205,6 +205,8 @@ document.getElementById("about").innerHTML="<strong>" + title + "</strong>" + "<
 	}
 function thumbClick(thumbNumber){
 	pos=thumbNumber;
+	document.getElementById("about").style.visibility='visible';
+	document.getElementById("navi").style.visibility='visible';
 	p();
 }
 function thumbClear(){document.getElementById("about").innerHTML="";}
@@ -244,6 +246,11 @@ function x(){
 	//if (pos==0){document.getElementById("pr").style.visibility='hidden'}
 	//document.getElementById("nx").style.visibility='visible';
 	//if (pos==stp){document.getElementById("nx").style.visibility='hidden'};
+}
+function mobileThumbs(){
+	document.getElementById("about").style.visibility='hidden';
+	document.getElementById("navi").style.visibility='hidden';
+	showThumbs();
 }
 function showThumbs(){
 	var posRestore = pos;
