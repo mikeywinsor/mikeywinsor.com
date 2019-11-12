@@ -194,7 +194,7 @@ prld = 1
 
 <!-- Paintings                    -->
 <!--  Navigation                  -->
-
+var onMobile = false;
 function p(){
 	ror[pos]();
 	//if (pos==0){document.getElementById("navi").style.visibility='hidden'}
@@ -212,6 +212,7 @@ function thumbClick(thumbNumber){
 function thumbClear(){document.getElementById("about").innerHTML="";}
 function thumbHover(thumbNumber){
 	ror[thumbNumber]();
+	if (onMobile){thumbClick(thumbnumber);};
 	document.getElementById("about").innerHTML="<strong>" + title + "</strong>" + "<br>" + "<br><specs>" +  specs + "</specs>";
 }
 function nx(){
@@ -250,6 +251,7 @@ function x(){
 function mobileThumbs(){
 	document.getElementById("about").style.visibility='hidden';
 	document.getElementById("navi").style.visibility='hidden';
+	onMobile=true;
 	showThumbs();
 }
 function showThumbs(){
