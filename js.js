@@ -1,12 +1,30 @@
-<!--  -->
-<!--  -->
+<!-- To add a painting to site -->
+<!--  add jpeg painting to painting folder  RUN batch on PSP 150 thumb  -->
+<!--  add function for painting and specs-->
+<!--  add painting to List of paintings-->
+<!--  to specify order from start add function to ror, do not duplicate in ord -->
 
 function pageload(){
-	thesunandthemoon();
 	p();}
 
 <!-- Paintings            -->
 <!-- Info to Variables    -->
+function seedless(){
+	title="Seedless";
+	specs="oil on paper,</br>12 x 9 in, 2020";
+	loc="seedless";}
+function seastroll(){
+	title="Sea Stroll";
+	specs="oil on canvas,</br>24 x 30 in, 2020";
+	loc="sea_stroll";}
+function bolt(){
+	title="Bolt";
+	specs="oil on canvas,</br>30 x 24 in, 2020";
+	loc="bolt";}
+function march(){
+	title="March";
+	specs="oil on canvas,</br>36 x 24 in, 2020";
+	loc="march";}
 function akid(){
 	title="A Kid ";
 	specs="oil on canvas,</br>30 x 24 in, 2018";
@@ -176,11 +194,11 @@ function anopenwindow(){
 	specs="oil on canvas,</br>36 x 24 in, 2019";
 	loc="an_open_window";}
 <!--    Painting Random Order         -->
-ord = [enroutetobreakfast,anothersummerdone,fromthebalcony,lunarzenith,turnaleaf,waterfall,thesunandthemoon,afeast,deepinthenight,edgesofhistory,gatheringclouds,onsynth,somethingemerges,itabides,happybirthday,grapplecoilandbite,eatyou,intravenous,plantinacup,sweetsweetnectar,aspring,bedtimestory,mudflap,takenbynotus,taxes,cityonisland,elephantsatriver,lasthikeofsummer,havesomemore,cleansheets,crystalballs,aplacetorest,oceanmeetearth,iceontheburn,akid,coralontherocks,deepsunlight,upthere,blush,anopenwindow];
+ord = [enroutetobreakfast,anothersummerdone,fromthebalcony,lunarzenith,turnaleaf,waterfall,thesunandthemoon,afeast,deepinthenight,edgesofhistory,gatheringclouds,onsynth,somethingemerges,itabides,happybirthday,grapplecoilandbite,eatyou,intravenous,plantinacup,sweetsweetnectar,aspring,bedtimestory,mudflap,takenbynotus,taxes,cityonisland,elephantsatriver,lasthikeofsummer,havesomemore,cleansheets,crystalballs,aplacetorest,oceanmeetearth,iceontheburn,akid,coralontherocks,deepsunlight,upthere,blush,anopenwindow,headintheclouds,thegathering,seedless];
 var n = ord.length;
 var stp = [n]
   // Take values from ord (images in order) and place them in a random order into a new order in ror (random order)
-var ror = [headintheclouds, thegathering];
+var ror = [march,bolt,seastroll];
 var pinOrder = ror.length;
  for ( var i = 0; i < n-pinOrder; i++ ) {
     ror.push(ord.splice(Math.floor(Math.random()*ord.length),1)[0]);
