@@ -40,7 +40,12 @@ function pageLoad() {
       let userName = user.email;
       let logoutButtonText = `Logout <br>${userName}`;
       document.getElementById("logoutButton").innerHTML = logoutButtonText;
-      importList();
+      db.collection("list").doc("h2a0tUXKobzdSeY3DoDW").onSnapshot(function(doc) {
+        console.log("Current data: ", doc.data());
+        itemList.innerHTML = '';
+        importList();
+    });
+
     }
     else {
         document.getElementById("login").style.display = "block";
