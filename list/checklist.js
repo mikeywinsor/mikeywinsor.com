@@ -38,7 +38,8 @@ function pageLoad() {
       logoutBlock.style.display = "block";
       addBlock.style.display = "block";
       let userName = user.email;
-      document.getElementById("logoutButton").innerText = 'Logout ' + userName;
+      let logoutButtonText = `Logout <br>${userName}`;
+      document.getElementById("logoutButton").innerHTML = logoutButtonText;
       importList();
     }
     else {
