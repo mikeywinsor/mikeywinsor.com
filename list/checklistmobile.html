@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist</title>
+    <title>Checklist Mobile</title>
     <link rel="shortcut icon" href="img/icn.ico">
     <style>
         body,
@@ -19,58 +19,43 @@
             display: grid;
             background-color: whitesmoke;
             padding: 10px;
-            grid-template-columns: 35% auto;
-            grid-template-rows: auto auto auto auto;
-            grid-template-areas:
-                "header logout"
-                "mainBlock mainBlock"
-                "checklistItem checklistItem"
-                "footer footer";
+
         }
 
         .header {
             grid-row: 1;
-            grid-column-start: 1;
-            grid-column-end: 1;
             text-align: center;
             font-size: 40px;
         }
 
         .logout {
-            grid-row: 1;
-            grid-column-start: 2;
-            grid-column-end: 2;
+            grid-row: 2;
             text-align: left;
         }
 
         .mainBlock {
-            grid-row: 2;
-            grid-column-start: 1;
-            grid-column-end: 3;
+            grid-row: 3;
             background-color: lightgrey;
             align-content: center;
             text-align: center;
         }
 
         .login {
+            grid-row: 4;
             display: none;
             padding: 20px;
             background-color: lightyellow;
-            grid-column-start: 1;
-            grid-column-end: 3;
         }
 
         .addBar {
             display: none;
             padding: 20px;
             background-color: beige;
-            grid-auto-columns: auto;
+            grid-row: 5;
         }
 
         .checklistItem {
-            grid-column-start: 1;
-            grid-column-end: 3;
-            grid-row-start: 3;
+            grid-row: 6;
             background-color: rgb(167, 190, 190);
             display: inline;
             font-size: 28px;
@@ -81,21 +66,13 @@
         }
 
         .footer {
-            grid-column-start: 1;
-            grid-column-end: 3;
-            grid-row: 4;
+            grid-row: 7;
             text-align: center;
             background-color: silver;
             padding: 40px;
         }
     </style>
 </head>
-
-<script type="text/javascript">
-    if (screen.width <= 699) {
-        document.location = "checklistmobile.html";
-    }
-</script>
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
