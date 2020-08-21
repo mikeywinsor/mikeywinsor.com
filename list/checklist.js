@@ -130,7 +130,7 @@ function printListItem (itemName){
     deleteIcon.src = 'delete.png';
     const newItemHTML = `
     <div id='${itemName}'>
-    <div class='checklistItem' style="display:inline-block; border:3px; border-style:solid; border-color:grey; font-size:30px; background-color:${randColor}">${itemName}</div>
+    <div class='checklistItem' style="display:inline-block; border:3px; border-style:solid; border-color:grey; font-size:20px; background-color:${randColor}">${itemName}</div>
     <div style='display:inline-block;'><img src='delete.png' onclick="removeListItem('${itemName}')"></div>
     </div>
     `;
