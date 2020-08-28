@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Checklist Mobile</title>
+    <link rel="shortcut icon" href="icon.ico">
+    <style>
+        body,
+        td,
+        th {
+            color: #666666;
+            font-size: 20px;
+            font-family: "Century Gothic";
+        }
+
+        input,
+        select {
+            font-size: 100%;
+        }
+
+        .grid-container {
+            display: grid;
+            background-color: whitesmoke;
+            padding: 3px;
+
+        }
+
+        .header {
+            grid-row: 1;
+            text-align: center;
+            font-size: 36px;
+        }
+
+        .login {
+            grid-row: 2;
+            display: none;
+            padding: 20px;
+            background-color: lightyellow;
+        }
+
+        .mainBlock {
+            grid-row: 3;
+            background-color: lightgrey;
+            align-content: center;
+            text-align: center;
+        }
+
+        .addBar {
+            display: none;
+            padding: 20px;
+            background-color: beige;
+            grid-row: 4;
+            align-content: center;
+            height: 30px;
+            line-height: 20px;
+        }
+
+        .checklistItem {
+            grid-row: 5;
+            background-color: rgb(199, 209, 214);
+            display: inline;
+            font-size: 28px;
+            align-content: center;
+            padding: 8px;
+            display: block;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .logout {
+            grid-row: 6;
+            text-align: left;
+        }
+
+        .footer {
+            grid-row: 7;
+            text-align: center;
+            background-color: silver;
+            padding: 16px;
+        }
+    </style>
+</head>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyA4FOGL6w5-Ih-Lf8LBlHLnzP6tr9iPOp0",
+        authDomain: "shoplist-ee208.firebaseapp.com",
+        databaseURL: "https://shoplist-ee208.firebaseio.com",
+        projectId: "shoplist-ee208",
+        storageBucket: "shoplist-ee208.appspot.com",
+        messagingSenderId: "47295770360",
+        appId: "1:47295770360:web:26484ccc456656bbb0150d",
+        measurementId: "G-QKW1E6ZD1V"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
+
+<body>
+    <div class='grid-container'>
+        <div class='header'>Checklist</div>
+        <img src='undo.png' id='undo' style='border:6px; border-style:solid; border-color:white; display: none;'
+            onclick="undoDelete()">
+        <div id='undoText'></div>
+    </div>
+    <div class="mainBlock">
+        <div class='login' id='login'>
+            <input type="text" size='25' placeholder="email" id="emailField">
+            </br>
+            <input type="password" size='25' placeholder="password" id="passField">
+            </br>
+            <button id='loginButton'>Login</button></div>
+        <div class='addBar' id='addBlock'><input id='itemInput' type="text" size='20' placeholder="add an item"
+                style="background-color:oldlace; border:6px; border-style:solid; border-color:powderblue">
+            </input><img src="plus.png" id="addButton">
+        </div>
+    </div>
+    <div class='checklistItem' id='checklist'>loading items</div>
+    <div class='logout' id='logout'>
+        <div id='logoutButton' style=`float: right;
+            style='background-color: lightsteelblue; border:6px; border-style:solid; border-color:darkgray' `></div>
+        <div class="footer">(c) mikey winsor</div>
+    </div>
+    <button id='devTest'>DevButton</button>
+    <button id='devTestTwo'>Dev 2 Button</button>
+    <script src="./list.js"></script>
+
+</body>
+
+</html>
