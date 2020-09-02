@@ -21,7 +21,7 @@ let undoTextArea = document.getElementById('undoText');
 let itemList = document.getElementById('checklist');
 let hideUndo = true;
 
-const smallSpace = `<div style='padding:4px;'></div>`
+const smallSpace = `<div style='padding:5px;'></div>`
 
 document.onload =pageLoad();
 
@@ -207,13 +207,13 @@ function printListItem (item, list){
     newItem = document.createElement('div');
     var newItemHTML = `
     <div id='${item}'>
-    <div class='checklistItem' style="display:inline-block; border:3px; border-style:solid; 
-    border-color:grey; font-size:20px; background-color:${randColor}">${item}</div>
+    <div class='checklistItem' style="display:inline-block; border:3px; border-style:solid;
+    border-color:rgb(162, 179, 189); font-size:20px; background-color:${randColor}">${item}</div>
     <div style='display:inline-block;'><img src='delete.png' onclick="removeItem('${item}','${list}')"></div>
     </div>
     `;
     if (item == "empty"){
-        newItemHTML = `<div>empty</div>`;
+        newItemHTML = `<div style='color:rgb(162, 179, 189)'>empty</div>`;
     };
     newItem.innerHTML = newItemHTML;
     itemList.appendChild(newItem);
@@ -225,7 +225,7 @@ function printListTitle (listName){
     let newItemHTML = `
     <div id='${listName}' style="text-align:left;">
     <div class='checklistItem' onclick="selectList('${listName}')" style="display:block; text-align:left; text-shadow: 2px 2px 5px darkgrey; 
-    border:10px; border-style:solid; border-color:lightgrey; font-size:20px; background-color:${randColor}">${listName}
+    border:10px; border-style:solid; border-color:rgb(137, 154, 163); font-size:20px; background-color:${randColor}">${listName}
     </div>
     </div>
     `;
@@ -235,7 +235,7 @@ function printListTitle (listName){
             newItemHTML = `
             <div id='${listName}' style="display:in-line block; box-shadow: 2px 2px 1px 2px #9da3a6;"><div class='checklistItem' 
             style="font-weight: bold; text-align:left;text-shadow: 1px 2px 2px lightgrey;
-             border:10px; border-style:solid; border-color:pink; font-size:24px; background-color:white">${listName}
+             border:10px; border-style:solid; border-color:rgb(237, 183, 184); font-size:24px; background-color:white">${listName}
              <img src='delete.png' style="float:right; text-align:left;" 
              onclick="removeList('${listName}')"></div></div>
             `;
@@ -297,7 +297,9 @@ function selectList (name) {
         selected : name
     }); 
     refreshList();
-    console.log(lastDeletedListItems);
+    document.body.scrollTop = 40;
+    document.documentElement.scrollTop = 40;
+    //console.log(lastDeletedListItems);
 }
 
 
@@ -357,35 +359,35 @@ function logout() {
 
 function makeRandoColor() {
     var rc = 'rgb(' + (Math.floor((256-229)*Math.random()) + 230) + ',' + 
-    (Math.floor((256-180)*Math.random()) + 220) + ',' + 
-    (Math.floor((256-180)*Math.random()) + 200) + ')';
+    (Math.floor((256-190)*Math.random()) + 220) + ',' + 
+    (Math.floor((256-190)*Math.random()) + 200) + ')';
     return rc;
 }
 
 // Enable dev button to reset list
 
 let devButton = document.getElementById('devTest');
-//devButton.remove();
-devButton.addEventListener("click",devButtonClick);
-function devButtonClick () {
-//     console.log('dev button clicked');
-//     db.collection("list").doc("h2a0tUXKobzdSeY3DoDW").set({
-//         checklist1: "eggs,bacon,butter"
-//     })
-//     .catch(function(error) {
-//         console.error("Error adding document: ", error);
-//     });
+devButton.remove();
+// devButton.addEventListener("click",devButtonClick);
+// function devButtonClick () {
+// //     console.log('dev button clicked');
+// //     db.collection("list").doc("h2a0tUXKobzdSeY3DoDW").set({
+// //         checklist1: "eggs,bacon,butter"
+// //     })
+// //     .catch(function(error) {
+// //         console.error("Error adding document: ", error);
+// //     });
 
-var setWithMerge = db.collection("list").doc("h2a0tUXKobzdSeY3DoDW").set({
-    Kroger: "chicken,milk,butter"
-}, { merge: true });
-}
+// var setWithMerge = db.collection("list").doc("h2a0tUXKobzdSeY3DoDW").set({
+//     Kroger: "chicken,milk,butter"
+// }, { merge: true });
+// }
 
 let devButtonTwo = document.getElementById('devTestTwo');
-//devButtonTwo.remove();
-devButtonTwo.addEventListener("click",devButtonClickTwo);
-function devButtonClickTwo () {
-    console.log('dev2 clicked');
-    removeItem("eggs","Kroger");
-}
+devButtonTwo.remove();
+// devButtonTwo.addEventListener("click",devButtonClickTwo);
+// function devButtonClickTwo () {
+//     console.log('dev2 clicked');
+//     removeItem("eggs","Kroger");
+// }
 
