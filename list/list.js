@@ -91,7 +91,7 @@ function refreshList () {
     itemList.innerText = '';
     while (i>0) {
         i--;
-        printListTitle(allLists[i]);
+        printListTitle(allLists[i],i);
         currentListItems = allData[allLists[i]].split(',');
         let q = currentListItems.length;
         itemList.innerHTML += smallSpace;
@@ -100,8 +100,11 @@ function refreshList () {
         }
         while (q>0){
             q--;
-            printListItem(currentListItems[q], allLists[i]);
+            printListItem(currentListItems[q], allLists[i], i, q);
             itemList.innerHTML += smallSpace;
+
+            //Developing numerical locations
+            //console.log(currentListItems[q] + "  " + allLists[i] + " q:" + q + " i:" + i);
         }
         
     }
@@ -110,8 +113,10 @@ function refreshList () {
 
 //Remove an Item from a List
 
-function removeItem (item, list){
-    console.log('item ' + item + ' list ' + list );
+function removeItem (listId, itemId){
+    let item = allData[allLists[listId]].split(',')[itemId];
+    let list = allLists[listId];
+    //console.log('item ' + item + ' list ' + list );
     lastDeleted = item;
     lastDeletedList = list;
     let idx = allLists.indexOf(list);
@@ -141,8 +146,9 @@ function removeItem (item, list){
 }
 
 
-function removeList(listName){
-    console.log("remove list " + listName);
+function removeList(listId){
+    let listName = allLists[listId];
+    //console.log("remove list " + listName);
 
         //Need to fix. If less than 2 lists, can't delete
 
@@ -202,14 +208,14 @@ function appendDbList (toAppend){
 
 }
 
-function printListItem (item, list){
+function printListItem (item, list, listId, itemId){
     var randColor = makeRandoColor();
     newItem = document.createElement('div');
     var newItemHTML = `
     <div id='${item}'>
     <div class='checklistItem' style="display:inline-block; border:3px; border-style:solid;
     border-color:rgb(162, 179, 189); font-size:20px; background-color:${randColor}">${item}</div>
-    <div style='display:inline-block;'><img src='delete.png' onclick="removeItem('${item}','${list}')"></div>
+    <div style='display:inline-block;'><img src='delete.png' onclick="removeItem('${listId}','${itemId}')"></div>
     </div>
     `;
     if (item == "empty"){
@@ -219,12 +225,12 @@ function printListItem (item, list){
     itemList.appendChild(newItem);
 }
 
-function printListTitle (listName){
+function printListTitle (listName, listId){
     var randColor = makeRandoColor();
     newItem = document.createElement('div');
     let newItemHTML = `
     <div id='${listName}' style="text-align:left;">
-    <div class='checklistItem' onclick="selectList('${listName}')" style="display:block; text-align:left; text-shadow: 2px 2px 5px darkgrey; 
+    <div class='checklistItem' onclick="selectList('${listId}')" style="display:block; text-align:left; text-shadow: 2px 2px 5px darkgrey; 
     border:10px; border-style:solid; border-color:rgb(137, 154, 163); font-size:20px; background-color:${randColor}">${listName}
     </div>
     </div>
@@ -237,7 +243,7 @@ function printListTitle (listName){
             style="font-weight: bold; text-align:left;text-shadow: 1px 2px 2px lightgrey;
              border:10px; border-style:solid; border-color:rgb(237, 183, 184); font-size:24px; background-color:white">${listName}
              <img src='delete.png' style="float:right; text-align:left;" 
-             onclick="removeList('${listName}')"></div></div>
+             onclick="removeList('${listId}')"></div></div>
             `;
         }
     }
@@ -282,7 +288,7 @@ function addNewList(){
 
 function appendListDatabase (){
     let newLN = document.getElementById('newListInput').value;
-    console.log(newLN);
+    //console.log(newLN);
     if(newLN){
         db.collection("list").doc("h2a0tUXKobzdSeY3DoDW").set({
             [newLN] : "empty"
@@ -291,7 +297,8 @@ function appendListDatabase (){
     refreshList();
 }
 
-function selectList (name) { 
+function selectList (listId) {
+    let name = allLists[listId]; 
     selectedList = name;
     db.collection("selectedList").doc("666").set({
         selected : name
@@ -370,18 +377,26 @@ let devButton = document.getElementById('devTest');
 devButton.remove();
 // devButton.addEventListener("click",devButtonClick);
 // function devButtonClick () {
-// //     console.log('dev button clicked');
-// //     db.collection("list").doc("h2a0tUXKobzdSeY3DoDW").set({
-// //         checklist1: "eggs,bacon,butter"
-// //     })
-// //     .catch(function(error) {
-// //         console.error("Error adding document: ", error);
-// //     });
+//     let item = `Trader Joe's`;
+//     var randColor = makeRandoColor();
+//     newItem = document.createElement('div');
+//     var newItemHTML = `
+//     <div id='${item}'>
+//     <div class='checklistItem' style="display:inline-block; border:3px; border-style:solid;
+//     border-color:rgb(162, 179, 189); font-size:20px; background-color:${randColor}">${item}</div>
+//     <div style='display:inline-block;'><img src='delete.png'></div>
+//     </div>
+//     `;
+//     if (item == "empty"){
+//         newItemHTML = `<div style='color:rgb(162, 179, 189)'>empty</div>`;
+//     };
+//     newItem.innerHTML = newItemHTML;
+//     itemList.appendChild(newItem);
+// }
 
 // var setWithMerge = db.collection("list").doc("h2a0tUXKobzdSeY3DoDW").set({
 //     Kroger: "chicken,milk,butter"
 // }, { merge: true });
-// }
 
 let devButtonTwo = document.getElementById('devTestTwo');
 devButtonTwo.remove();
