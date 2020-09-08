@@ -284,6 +284,12 @@ function addNewList(){
     addListLoc.appendChild(inputBar);
     var listAddButton = document.getElementById("newListAddButton");
     listAddButton.addEventListener("click",appendListDatabase);
+    let inputListBar = document.getElementById('newListInput');
+    inputListBar.addEventListener('keyup', function (event) {
+    if (event.keyCode === 13){
+        listAddButton.click();
+    }
+    });
 }
 
 function appendListDatabase (){
