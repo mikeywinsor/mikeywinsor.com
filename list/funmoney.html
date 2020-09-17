@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Money</title>
+</head>
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        background-color: lightgray;
+        padding: 10px;
+    }
+
+    .page-title {
+        grid-column: 1/4;
+        background-color: rgb(206, 202, 194);
+        border-style: solid;
+        border-color: rgb(245, 240, 228);
+        color: dimgrey;
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .mTitle {
+        grid-column: 1/3;
+        border-style: solid;
+        border-color: cornsilk;
+        border-bottom-color: dimgrey;
+        background-color: rgb(199, 214, 218);
+        padding: 14px;
+        font-size: 25px;
+        text-align: center;
+        color: rgb(78, 111, 121);
+    }
+
+    .yTitle {
+        grid-column: 3/5;
+        border-style: solid;
+        border-color: cornsilk;
+        border-bottom-color: dimgrey;
+        background-color: rgb(199, 214, 218);
+        padding: 14px;
+        font-size: 25px;
+        text-align: center;
+        color: rgb(78, 111, 121);
+    }
+
+    .leftSpan {
+        grid-column: 1/3;
+        background-color: rgb(245, 240, 228);
+        padding: 14px;
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .rightSpan {
+        grid-column: 3/5;
+        background-color: rgb(245, 240, 228);
+        padding: 14px;
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .navi-button {
+        grid-column-start: 4;
+        grid-column-end: 4;
+        text-align: right;
+    }
+
+    .inputBar {
+        grid-column: 1/5;
+        background-color: floralwhite;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .grid-item {
+        background-color: rgb(245, 240, 228);
+        padding: 14px;
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .historyM {
+        border-color: rgb(236, 231, 230);
+        border-style: solid;
+        grid-column: 1/3;
+    }
+
+    .historyY {
+        border-color: rgb(236, 231, 230);
+        border-style: solid;
+        grid-column: 3/5;
+        display: inline-block;
+    }
+
+    .minus-item {
+        background-color: rgb(233, 208, 219);
+        padding: 14px;
+        font-size: 11px;
+        text-align: right;
+        display: inline-block;
+        flex: 1;
+        color: saddlebrown;
+    }
+
+    .plus-item {
+        background-color: rgb(221, 240, 206);
+        padding: 14px;
+        font-size: 11px;
+        text-align: right;
+        display: inline-block;
+        flex: 1;
+        color: rgb(57, 90, 5);
+    }
+
+    .balance-item {
+        background-color: rgb(245, 240, 228);
+        padding: 14px;
+        font-size: 20px;
+        text-align: left;
+        display: inline-block;
+        flex: 1;
+        color: rgb(69, 69, 69);
+    }
+</style>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyA4FOGL6w5-Ih-Lf8LBlHLnzP6tr9iPOp0",
+        authDomain: "shoplist-ee208.firebaseapp.com",
+        databaseURL: "https://shoplist-ee208.firebaseio.com",
+        projectId: "shoplist-ee208",
+        storageBucket: "shoplist-ee208.appspot.com",
+        messagingSenderId: "47295770360",
+        appId: "1:47295770360:web:26484ccc456656bbb0150d",
+        measurementId: "G-QKW1E6ZD1V"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
+
+<body>
+
+    <div class="grid-container">
+        <div class="page-title">Fun Money</div>
+        <div class="navi-button"><a href="list_m.html"><img src="list.png"></a></div>
+        <div class="mTitle" id='mTitle'>mikey</div>
+        <div class="yTitle" id='yTitle'>yoko</div>
+        <div class="leftSpan" id='mikeyBalance'>-_-</div>
+        <div class="rightSpan" id='yokoBalance'>-_-</div>
+        <div class='historyM' id='mHistory' style="display: inline-block;">loading</div>
+        <div class="historyY" id='yHistory' style="display: inline-block;">loading</div>
+        <div class="leftSpan"><img id='mikeyPlus' onclick="addMoneyMikey()" src="plus.png"></div>
+        <div class="rightSpan"><img id='yokoPlus' onclick="addMoneyYoko()" src="plus.png"></div>
+        <div class="inputBar" id='inputBlock' style='display: none'><input id='balanceBar' type="text" size='30'
+                placeholder="how much?" style="width:5em; padding: 13px;"> <img id='plusButton' style="padding: 2px;"
+                src="plus.png">
+            <a onclick="cancelAdd()">
+                <div style="display: inline; border: thin; border-color: rgb(236, 231, 230);
+                border-style: solid; padding: 12px;">cancel</div>
+            </a>
+        </div>
+    </div>
+    <div class='login' id='login' style='display: none'>
+        <input type="text" size='25' placeholder="email" id="emailField">
+        </br>
+        <input type="password" size='25' placeholder="password" id="passField">
+        </br>
+        <button id='loginButton'>Login</button></div>
+    <button id='devButton' onclick="devButtonClick()">Dev Button</button>
+
+    <script src="funmoney.js"></script>
+</body>
+
+</html>

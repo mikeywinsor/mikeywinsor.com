@@ -351,7 +351,7 @@ function login(){
       //if login successful replace please log in with items
      firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            //itemList.innerText = 'loading items';
+            console.log('onAuthStateChanged(function(user');
         } 
       });
       
@@ -369,6 +369,20 @@ function logout() {
       });
 
 }
+
+function funMoneyClick (){
+
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            window.location = 'funmoney.html';
+        } 
+      });
+
+
+    
+}
+
 
 function makeRandoColor() {
     var rc = 'rgb(' + (Math.floor((256-229)*Math.random()) + 230) + ',' + 
@@ -408,7 +422,10 @@ let devButtonTwo = document.getElementById('devTestTwo');
 devButtonTwo.remove();
 // devButtonTwo.addEventListener("click",devButtonClickTwo);
 // function devButtonClickTwo () {
-//     console.log('dev2 clicked');
-//     removeItem("eggs","Kroger");
+
+//     var setWithMerge = db.collection("funmoney").doc("amounts").set({
+//         Bogo: 174
+//     }, { merge: true });
+
 // }
 
