@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Budget</title>
+</head>
+<style>
+    .mainGrid {
+        display: grid;
+        grid-template-columns: 20% 20% 20% 40%;
+        background-color: lightgray;
+        padding: 10px;
+
+    }
+
+    .pageName {
+        grid-column: 1/4;
+        display: inline-block;
+        text-align: center;
+        padding: 10px;
+        background-color: gainsboro;
+        border-width: thick;
+        border: thistle;
+        border-style: solid;
+        border-bottom: gainsboro;
+        font-size: 25px;
+        color: rgb(78, 111, 121);
+    }
+
+    .navi-block {
+        grid-column: 4/5;
+        display: inline-block;
+        text-align: right;
+        padding: 10px;
+    }
+
+    .budget-add {
+        grid-row: 2;
+        grid-column: 1/2;
+        background-color: lightgray;
+        padding: 15px;
+        border-style: solid;
+        border-color: thistle;
+        align-items: center;
+        display: block;
+        margin: auto;
+    }
+
+    .budget-balance {
+        grid-row: 2;
+        grid-column: 2/5;
+        text-align: center;
+        background-color: honeydew;
+        border-width: thick;
+        border: thistle;
+        border-style: solid;
+        padding: 15px;
+        font-size: 30px;
+        color: slategray;
+        display: inline-block;
+    }
+
+    .input-balance-bar {
+        grid-row: 3;
+        grid-column: 1/5;
+        padding: 20px;
+        display: inline-block;
+        border-style: dotted;
+        border-color: thistle;
+    }
+
+    .history-price {
+        grid-row-start: 4;
+        grid-column: 1/3;
+        background-color: floralwhite;
+        display: block;
+        padding: 10px;
+        border-width: thick;
+        border: thistle;
+        border-style: solid;
+        text-align: right;
+        color: lightslategray;
+        font-size: 18px;
+        padding: 14px;
+
+    }
+
+    .history-place {
+
+        border-width: thick;
+        border: thistle;
+        border-style: solid;
+        font-size: 18px;
+        color: lightslategrey;
+        grid-row-start: 4;
+        grid-column: 3/5;
+        background-color: cornsilk;
+        text-align: center;
+        display: block;
+        text-align: left;
+        padding: 14px;
+    }
+
+    .bottom-arrow {
+        grid-column: 1/5;
+        grid-row: 5;
+        text-align: center;
+        display: block;
+        margin: auto;
+    }
+</style>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyA4FOGL6w5-Ih-Lf8LBlHLnzP6tr9iPOp0",
+        authDomain: "shoplist-ee208.firebaseapp.com",
+        databaseURL: "https://shoplist-ee208.firebaseio.com",
+        projectId: "shoplist-ee208",
+        storageBucket: "shoplist-ee208.appspot.com",
+        messagingSenderId: "47295770360",
+        appId: "1:47295770360:web:26484ccc456656bbb0150d",
+        measurementId: "G-QKW1E6ZD1V"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
+
+<body>
+    <div class='mainGrid'>
+        <div class='pageName'>Budget</div>
+        <div class='navi-block'><a href="list_m.html"><img src="list.png"></a> <a href="funmoney.html"><img
+                    src="fun.png"></a></div>
+        <div class='budget-add' style="flex: auto;"><img src="plus.png" onclick="clickAdd()"></div>
+        <div class="input-balance-bar" id='inputTransactionBlock' style="display: none;">
+            <input id='inputTransactionPrice' type="text" placeholder="amount" size="7">
+            <input id='inputTransactionPlace' type="text" placeholder="location" size="10">
+            <button id='addTransactionButton' onclick="transactionSubmit()">Add + </button>
+        </div>
+        <div class='budget-balance' id='budgetBalance'></div>
+        <div id="historyPrices" class='history-price'>-_-</div>
+        <div id="historyPlaces" class='history-place'>-_-</div>
+        <img id='bottomArrow' class='bottom-arrow' src="down.png" onclick="expandHistory()">
+    </div>
+    <div id='loginBlock' style='display: none'>
+        <input type="text" size='25' placeholder="email" id="emailField">
+        </br>
+        <input type="password" size='25' placeholder="password" id="passField">
+        </br>
+        <button id='loginButton'>Login</button></div>
+    </div>
+
+    <script src="budget.js"></script>
+</body>
+
+</html>

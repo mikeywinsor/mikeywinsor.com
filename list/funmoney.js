@@ -210,7 +210,7 @@ function updateBalances(name, amount){
 
 function cancelAdd(){
     balanceBar.value = '';
-    console.log(funMoneyData[name]);
+    //console.log(funMoneyData[name]);
     mikeySelected = false;
     mTitle.style = unselectedTitleBorder;
     yTitle.style = unselectedTitleBorder;
