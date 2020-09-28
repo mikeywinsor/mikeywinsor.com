@@ -1,6 +1,10 @@
 
 const db = firebase.firestore();
 const docRef = db.collection("budget").doc("balances");
+const docDate = db.collection("budget").doc("nextpayday");
+
+let nextPayDay = '';
+let futurePayDay = '';
 
 const loginBlock = document.getElementById("loginBlock");
 const loginButton = document.getElementById("loginButton");
@@ -57,11 +61,54 @@ function refreshPage (){
     }).catch(function(error) {
         console.log("Error getting document:", error);
     });;
+    docDate.get().then(function(doc) {
+        if (doc.exists) {
+            nextPayDay = doc.data(); 
+            nextPayDay = nextPayDay.topay.toDate();
+            checkDate();
+        } else {
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });;
 
 }
 
+function checkDate(){
+    console.log(nextPayDay);
+    let d = new Date();
+    console.log(d);
+    let numWeeks = 2;
+    let newDate = nextPayDay;
+    now.setDate(nextPayDay + numWeeks * 7);
+    console.log(newDate)
+
+    if(d>nextPayDay){
+        updatePayDate();
+    }
+}
+
+function updatePayDate(){
+    nextPayDay.setDate(nextPayDay.getDate() + 14);
+
+    docDate.set({
+        topay : nextPayDay
+    }, { merge: true });
+    
+    paydayPoutout();
+}
+
+function paydayPoutout() {
+    console.log('afterpayday');
+    let balanceAdjust = (allData["balance"] + 700);
+    let newTransaction = "700, + Payday";
+    writeHistoryDB(newTransaction,balanceAdjust);
+}
+
 function loadBalances(){
-    budgetBalance.innerText = '$' + allData["balance"];
+    let num = allData["balance"];
+    budgetBalance.innerText = '$' + (Math.round(num * 100) / 100).toFixed(2);
     historyPlaces.innerText = '';
     historyPrices.innerText = '';
     transPrice.value = '';
@@ -111,14 +158,17 @@ function transactionSubmit(){
     let newTransaction = transPrice.value + ", " + transPlace.value;
     console.log(newTransaction);
     let balanceAdjust = (allData["balance"] - transPrice.value);
-    console.log(balanceAdjust);
-    let newArrayHistory = allData["history"].unshift(newTransaction);
+    writeHistoryDB(newTransaction,balanceAdjust);
+}
+
+function writeHistoryDB(newHistory,newBalance){
+    let newArrayHistory = allData["history"].unshift(newHistory);
     console.log(newArrayHistory);
     docRef.set({
         history : allData['history']
     }, { merge: true });
     docRef.set({
-        balance : balanceAdjust
+        balance : newBalance
     }, { merge: true }
     );
 }
