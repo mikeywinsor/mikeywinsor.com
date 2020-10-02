@@ -76,14 +76,8 @@ function refreshPage (){
 }
 
 function checkDate(){
-    console.log(nextPayDay);
     let d = new Date();
     console.log(d);
-    let numWeeks = 2;
-    let newDate = nextPayDay;
-    now.setDate(nextPayDay + numWeeks * 7);
-    console.log(newDate)
-
     if(d>nextPayDay){
         updatePayDate();
     }
