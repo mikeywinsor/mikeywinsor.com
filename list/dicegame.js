@@ -43,7 +43,7 @@ function pageLoad(){
         if (userEmail == "mikeywinsor@gmail.com" || userEmail == "bogo@boogle.com" || userEmail == "chicago@boogle.com"){
             mRollButton.style.display = 'block';
         } else if (userEmail == "yoko@boogle.com"){
-            mRollButton.style.display = 'block';
+            yRollButton.style.display = 'block';
         }
       });
     
