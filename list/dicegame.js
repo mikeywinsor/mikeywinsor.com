@@ -40,7 +40,7 @@ function pageLoad(){
             displayLogin();
         }
         userEmail = user.email;
-        if (userEmail == "mikeywinsor@gmail.com"){
+        if (userEmail == "mikeywinsor@gmail.com" || userEmail == "bogo@boogle.com"){
             mRollButton.style.display = 'block';
         } else if (userEmail == "yoko@boogle.com"){
             mRollButton.style.display = 'block';
