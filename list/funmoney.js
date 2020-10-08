@@ -4,9 +4,9 @@ var db = firebase.firestore();
 var docRef = db.collection("funmoney").doc("amounts");
 var docHistory = db.collection("funmoney").doc("history");
 
-let mikeyMoney = 0;
+let mikeyMoney = 0.01;
 var mikeyHistory = null;
-let yokoMoney = 0;
+let yokoMoney = 0.01;
 let yokoHistory = null;
 let mikeySelected = false;
 
@@ -176,9 +176,9 @@ function addToBalance(){
 function updateBalances(name, amount){
     //console.log("name: " + name + " plus " + amount);
     let junk = '';
-    amount = parseInt(amount);
+    amount = parseFloat(amount);
     if (mikeySelected){
-        mikeyMoney = parseInt(mikeyMoney);
+        mikeyMoney = parseFloat(mikeyMoney);
         mikeyMoney = mikeyMoney + amount;
         junk  = mikeyHistory.unshift(amount);
         junk = mikeyHistory.pop();
@@ -191,7 +191,7 @@ function updateBalances(name, amount){
             mikey : mikeyMoney
         }, { merge: true });
     }else{
-        yokoMoney = parseInt(yokoMoney);
+        yokoMoney = parseFloat(yokoMoney);
         yokoMoney = yokoMoney + amount;
         junk  = yokoHistory.unshift(amount);
         junk = yokoHistory.pop();
