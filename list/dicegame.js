@@ -66,6 +66,9 @@ function pageLoad(){
         if (user) {
             loginBlock.style.display = 'none';
             fetchDataRefresh();
+            docLastRoll.onSnapshot(function(doc) {
+            fetchDataRefresh();
+            });
         } else {
             console.log('not logged in');
             displayLogin();
