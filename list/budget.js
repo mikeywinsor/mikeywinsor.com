@@ -29,7 +29,7 @@ let place = "place";
 
 let allData = '';
 
-document.onload =pageLoad();
+document.onload = pageLoad();
 
 function pageLoad() {
 

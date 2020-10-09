@@ -26,6 +26,7 @@
 
     .navi-block {
         grid-column: 3/4;
+        padding: 2px;
     }
 
     .wide-row {
@@ -44,7 +45,7 @@
         border-color: darkgoldenrod;
         border-style: solid;
         background-color: ghostwhite;
-        width: 86%;
+        width: 87%;
     }
 
     .left-column {
@@ -74,6 +75,24 @@
         padding: 20px;
         border-style: solid;
         border-color: peru;
+    }
+
+    .streak-box {
+        display: inline-block;
+        grid-column: 1/4;
+        padding: 20px;
+        border-style: groove;
+        border-color: wheat;
+        font-size: 16px;
+    }
+
+    .roll-button {
+        padding: 12px;
+        display: none;
+        border-style: double;
+        border-color: honeydew;
+        background-color: dimgray;
+        color: gold;
     }
 
     .login {
@@ -116,15 +135,17 @@
             <img id='dice-image' src="1.png" style="position: absolute;">
         </div>
         <div class="left-column">Mikey</br>
-            <img id='dice-M' src="1.png" style="padding: 20px"></br>
-            <button id='mikeyRollButton' onclick="rollDice(true)" style="padding: 12px; display: none">Roll
-                Dice</button>
+            <img id='dice-M' src="minus.png" style="padding: 20px"></br>
+            <div id='mikeyRollButton' onclick="rollDice()" class="roll-button">
+                Roll Dice</div>
         </div>
         <div class="right-column">Yoko</br>
-            <img id='dice-Y' src="1.png" style="padding: 20px"></br>
-            <button id='yokoRollButton' onclick="rollDice(false)" style="padding: 12px; display: none">Roll
-                Dice</button>
+            <img id='dice-Y' src="minus.png" style="padding: 20px"></br>
+            <div id='yokoRollButton' onclick="rollDice()" class="roll-button">
+                Roll
+                Dice</div>
         </div>
+        <div class="streak-box" id="streak">loading streak... </div>
 
     </div>
     <div class='login' id='login'>

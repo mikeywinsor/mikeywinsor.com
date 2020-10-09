@@ -1,5 +1,3 @@
-console.log('hello');
-
 var db = firebase.firestore();
 var docRef = db.collection("funmoney").doc("amounts");
 var docHistory = db.collection("funmoney").doc("history");
@@ -89,7 +87,6 @@ function getHistory(){
 function printHistory(){
     mikeyHistory = historyAll["mikey"].split(',');
     yokoHistory= historyAll["yoko"].split(',');
-    console.log(mikeyHistory + `  ` + yokoHistory);
     let i = 0;
     let mBal = mikeyMoney;
     let yBal = yokoMoney;
@@ -101,25 +98,25 @@ function printHistory(){
     while (i < 4) {
         // Add each row of history 
         mBal -= mikeyHistory[i];
-        newBalanceItem = ` . <div class='balance-item' style="display:in-line block;"> ${mBal} </div>`;
+        newBalanceItem = ` . <div class='balance-item' style="display:in-line block;"> ${mBal}</div>`;
         mBlock.insertAdjacentHTML("beforeend",newBalanceItem);
         lNo = mikeyHistory[i];
         if (lNo < 0){
             lNo = Math.abs(lNo);
-            newAdjustItem = ` - <div class='minus-item' style=" display:in-line block;"> ${lNo} </div>`;
+            newAdjustItem = ` - <div class='minus-item' style=" display:in-line block;">${lNo}</div>`;
         }else{
-            newAdjustItem = ` + <div class='plus-item' style="display:in-line block;"> ${lNo} </div>`;
+            newAdjustItem = ` + <div class='plus-item' style="display:in-line block;">${lNo}</div>`;
         };
         mBlock.insertAdjacentHTML("beforeend",newAdjustItem + smallSpace);
         yBal -= yokoHistory[i];
-        newBalanceItem = ` . <div class='balance-item' style="display:in-line block;"> ${yBal} </div>`;
+        newBalanceItem = ` . <div class='balance-item' style="display:in-line block;">${yBal}</div>`;
         yBlock.insertAdjacentHTML("beforeend",newBalanceItem);
         yNo = yokoHistory[i];
         if (yNo < 0){
             yNo = Math.abs(yNo);
-            newAdjustItem = ` - <div class='minus-item' style="display:in-line block;"> ${yNo} </div>`;
+            newAdjustItem = ` - <div class='minus-item' style="display:in-line block;">${yNo}</div>`;
         }else{
-            newAdjustItem = ` + <div class='plus-item' style="display:in-line block;"> ${yNo} </div>`;
+            newAdjustItem = ` + <div class='plus-item' style="display:in-line block;">${yNo}</div>`;
         };
         yBlock.insertAdjacentHTML("beforeend",newAdjustItem + smallSpace);
         i++;
@@ -166,14 +163,14 @@ balanceInput.addEventListener("keydown", function(event) {
 function addToBalance(){
     if (balanceBar.value){
         if (mikeySelected){
-            updateBalances("mikey",balanceBar.value);
+            updateBalances(balanceBar.value);
         } else {
-            updateBalances("yoko",balanceBar.value);
+            updateBalances(balanceBar.value);
         }
     }
 }
 
-function updateBalances(name, amount){
+function updateBalances(amount){
     //console.log("name: " + name + " plus " + amount);
     let junk = '';
     amount = parseFloat(amount);

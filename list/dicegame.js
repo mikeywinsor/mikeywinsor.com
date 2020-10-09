@@ -1,7 +1,7 @@
 const db = firebase.firestore();
-
-let mCheckedIn = false;
-let yCheckedIn = false;
+const docLastRoll = db.collection("dice").doc("lastRoll");
+const docRef = db.collection("funmoney").doc("amounts");
+const docHistory = db.collection("funmoney").doc("history");
 
 let randomRoll = 0;
 let randomRotation = 0;
@@ -16,8 +16,25 @@ let diceSpeed = 40;
 let b = null;
 let mikeyScore = 0;
 let yokoScore = 0;
-let currentDiceRollerMikey = true;
 let userEmail = "";
+let lastPayoutDate = null;
+let streakName = "";
+let streakCount = 9;
+let streakData = "";
+let oneRollToday = null;
+let allDiceData = "";
+let mRollDate = '';
+let yRollDate = '';
+let currentRollerMikey = '';
+let gameTie = false;
+let oneSidedGameWin = null;
+
+let mikeyMoney = 0.01;
+var mikeyHistory = null;
+let yokoMoney = 0.01;
+let yokoHistory = null;
+let funMoneyData = '';
+let historyAll = '';
 
 const diceArea = document.getElementById('diceArea');
 const diceM = document.getElementById('dice-M');
@@ -26,28 +43,114 @@ const diceImage = document.getElementById('dice-image');
 const yRollButton = document.getElementById('yokoRollButton');
 const mRollButton = document.getElementById('mikeyRollButton');
 const loginBlock = document.getElementById('login');
+const streakDiv = document.getElementById('streak');
+
+const isToday = (compareDate) => {
+    const today = new Date()
+    return compareDate.getDate() == today.getDate() &&
+      compareDate.getMonth() == today.getMonth() &&
+      compareDate.getFullYear() == today.getFullYear()
+  }
+
+const isSameDay = (compareDateA, compareDateB) => {
+    return compareDateA.getDate() == compareDateB.getDate() &&
+     compareDateA.getMonth() == compareDateB.getMonth() &&
+     compareDateA.getFullYear() == compareDateB.getFullYear()
+    }
 
 document.onload = pageLoad();
 
 function pageLoad(){
-    updateScoresOnDice();
     diceArea.style.display = "none";
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             loginBlock.style.display = 'none';
+            fetchDataRefresh();
         } else {
             console.log('not logged in');
             displayLogin();
         }
         userEmail = user.email;
         if (userEmail == "mikeywinsor@gmail.com" || userEmail == "bogo@boogle.com" || userEmail == "chicago@boogle.com"){
-            mRollButton.style.display = 'block';
-        } else if (userEmail == "yoko@boogle.com"){
-            yRollButton.style.display = 'block';
+            currentRollerMikey = true;
+        } else if (userEmail == "yoko@boogle.com" || userEmail == "yokotesting@boogle.com" ){
+            currentRollerMikey = false;
         }
       });
-    
 }
+
+function fetchDataRefresh(){
+    docLastRoll.get().then(function(doc) {
+        if (doc.exists) {
+            allDiceData = doc.data();
+            streakName = allDiceData["streakWho"];
+            streakCount = allDiceData["streakCount"];
+            oneRollToday = allDiceData["oneRollToday"];
+            lastPayoutDate = new Date(allDiceData["previousRewardDate"].toDate());
+            mRollDate = new Date(allDiceData["mDate"].toDate());
+            yRollDate = new Date(allDiceData["yDate"].toDate());
+            mikeyScore = allDiceData["mikey"];
+            yokoScore = allDiceData["yoko"];
+            updateStreak();
+            if (isToday(lastPayoutDate)){
+                noMorePayouts(); 
+            }else{
+                if (!isToday(mRollDate)){mikeyScore = 0; if (currentRollerMikey){mRollButton.style.display = "block"}};
+                if (!isToday(yRollDate)){yokoScore = 0; if (!currentRollerMikey){yRollButton.style.display = "block"}};
+                loadFunMoney();
+            }
+            updateScoresOnDice();
+        } else {
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });;
+
+}
+
+function updateStreak(){
+    streakDiv.innerText = "Streak: " + streakName + " " + streakCount;
+}
+
+function noMorePayouts(){
+    yRollButton.style.display = "none";
+    mRollButton.style.display = "none";
+}
+
+function checkUnpaid(){
+    if(isSameDay(mRollDate,yRollDate)){
+        console.log('same day past');
+     }
+    if (!isSameDay(mRollDate,yRollDate) && !isToday(mRollDate) && !isToday(yRollDate)){
+        console.log('different days, and no roll today');
+        let newSameDate = "";
+        let winnings = .5;
+        if(mRollDate>yRollDate){
+            oneSidedGameWin = "mikey";
+            newSameDate = mRollDate;
+        }else{
+            oneSidedGameWin = "yoko";
+            newSameDate = yRollDate;
+        }
+        if (streakName == oneSidedGameWin){streakCount += 1}else{streakCount = 0};
+        if(streakCount == 5){streakCount = 1; winnings+=5};
+        writeToFunmoneyDatabase(winnings);
+        dbAllDatesUpdate(newSameDate);
+     }
+}
+
+function dbAllDatesUpdate(newDate){
+    docLastRoll.set({
+        oneRollToday : false,
+        yDate : newDate,
+        mDate : newDate,
+        previousRewardDate : newDate,
+        streakWho : oneSidedGameWin,
+        streakCount : streakCount
+    }, { merge: true });
+}
+
 
 function displayLogin(){
     loginBlock.style.display = 'block';
@@ -55,13 +158,11 @@ function displayLogin(){
 
 
 function updateScoresOnDice(){
-    //need to load values from DB
     diceM.src = mikeyScore + `.png`;
     diceY.src = yokoScore + `.png`;
 }
 
-function rollDice(name){
-    currentDiceRollerMikey = name;
+function rollDice(){
     resetBouncesVariables();
     setTimeout("startRoll()",400);
     yRollButton.style.display = "none";
@@ -72,7 +173,6 @@ function rollDice(name){
 function startRoll(){
     b = setInterval(changeNumber, diceSpeed);
 }
-
 
 function changeNumber(){
     rollNumber();
@@ -85,6 +185,7 @@ function changeNumber(){
     if (bounces == 0){
         stopDice();
         lastDiceRoll = randomRoll;
+        if (currentRollerMikey){mikeyScore=lastDiceRoll}else{yokoScore=lastDiceRoll};
     }
 }
 
@@ -137,12 +238,8 @@ function dieLayFlat(){
 
 function closeDiceRoll(){
     fadeOut();
-    if (currentDiceRollerMikey){
-        diceM.src = lastDiceRoll + '.png';
-    }else{
-        diceY.src = lastDiceRoll + '.png';
-    }
-
+    updateScoresOnDice()
+    computeDiceRoll();
 }
 
 function fadeOut(){
@@ -165,6 +262,102 @@ function fadeOut(){
 
 }
 
+function computeDiceRoll(){
+    let payoutPrevious = new Date(lastPayoutDate);
+    let rightNow = new Date();
+    let roller = [];
+    let payOut = .5;
+    if(currentRollerMikey){
+        roller = ["mikey","mDate", false,"mikey",1];
+        if(yokoScore == 0){roller[2] = true};
+        if(streakName == "mikey"){roller[4]=streakCount + 1}
+    }else {
+        roller = ["yoko","yDate",false,"yoko",1];
+        if(mikeyScore == 0){roller[2] = true};
+        if(streakName == "yoko"){roller[4]=streakCount + 1}
+    }
+    if(mikeyScore != 0 && yokoScore != 0){
+        if(streakCount + 1 == 5){payout += 5; roller[4] = 1; celebrateStreak();}
+        if(mikeyScore>yokoScore || yokoScore>mikeyScore){writeToFunmoneyDatabase(payOut);}
+        if(mikeyScore == yokoScore){roller[3] = "tie"; gameTie = true; writeToFunmoneyDatabase(.25);}
+        payoutPrevious = new Date();
+    }
+    docLastRoll.set({
+        [roller[0]] : lastDiceRoll,
+        [roller[1]] : rightNow,
+        oneRollToday : roller[2],
+        streakWho : roller[3],
+        streakCount : roller[4],
+        previousRewardDate : payoutPrevious
+    }, { merge: true });
+
+}
+
+function writeToFunmoneyDatabase(amount){
+    let junk = '';
+    mikeyHistory = historyAll["mikey"].split(',');
+    yokoHistory= historyAll["yoko"].split(',');
+    amount = parseFloat(amount);
+    if (currentRollerMikey || gameTie || oneSidedGameWin == "mikey"){
+        mikeyMoney = parseFloat(mikeyMoney);
+        mikeyMoney = mikeyMoney + amount;
+        junk = mikeyHistory.unshift(amount);
+        junk = mikeyHistory.pop();
+        let toAppend = mikeyHistory.toString();
+        docHistory.set({
+            mikey : toAppend
+        }, { merge: true });
+        docRef.set({
+            mikey : mikeyMoney
+        }, { merge: true });
+    }
+    if (!currentRollerMikey || gameTie || oneSidedGameWin == "yoko"){
+        yokoMoney = parseFloat(yokoMoney);
+        yokoMoney = yokoMoney + amount;
+        junk = yokoHistory.unshift(amount);
+        junk = yokoHistory.pop();
+        let toAppend = yokoHistory.toString();
+        docHistory.set({
+            yoko : toAppend
+        }, { merge: true });
+        docRef.set({
+           yoko : yokoMoney
+        }, { merge: true });
+    }
+    // console.log(amount);
+}
+
+function celebrateStreak(){
+    console.log('good job');
+}
+
+function loadFunMoney(){
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            funMoneyData = doc.data(); 
+            mikeyMoney = funMoneyData.mikey;
+            yokoMoney = funMoneyData.yoko;
+        } else {
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });;
+    loadFunMoneyHistory();
+}
+
+function loadFunMoneyHistory(){
+    docHistory.get().then(function(doc) {
+        if (doc.exists) {
+            historyAll = doc.data();
+            checkUnpaid();
+        } else {
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });;
+}
 
 let loginButton = document.getElementById('loginButton');
 loginButton.addEventListener("click",login);
@@ -187,3 +380,6 @@ function login(){
       });
       
 }
+
+
+  
