@@ -27,7 +27,7 @@ let mRollDate = '';
 let yRollDate = '';
 let currentRollerMikey = '';
 let gameTie = false;
-let oneSidedGameWin = null;
+let winner = "";
 
 let mikeyMoney = 0.01;
 var mikeyHistory = null;
@@ -130,13 +130,13 @@ function checkUnpaid(){
         let newSameDate = "";
         let winnings = .5;
         if(mRollDate>yRollDate){
-            oneSidedGameWin = "mikey";
+            winner = "mikey";
             newSameDate = mRollDate;
         }else{
-            oneSidedGameWin = "yoko";
+            winner = "yoko";
             newSameDate = yRollDate;
         }
-        if (streakName == oneSidedGameWin){streakCount += 1}else{streakCount = 0};
+        if (streakName == winner){streakCount += 1}else{streakCount = 0};
         if(streakCount == 5){streakCount = 1; winnings+=5};
         writeToFunmoneyDatabase(winnings);
         dbAllDatesUpdate(newSameDate);
@@ -149,7 +149,7 @@ function dbAllDatesUpdate(newDate){
         yDate : newDate,
         mDate : newDate,
         previousRewardDate : newDate,
-        streakWho : oneSidedGameWin,
+        streakWho : winner,
         streakCount : streakCount
     }, { merge: true });
 }
@@ -281,7 +281,18 @@ function computeDiceRoll(){
     }
     if(mikeyScore != 0 && yokoScore != 0){
         if(streakCount + 1 == 5){payout += 5; roller[4] = 1; celebrateStreak();}
-        if(mikeyScore>yokoScore || yokoScore>mikeyScore){writeToFunmoneyDatabase(payOut);}
+        if(mikeyScore>yokoScore || yokoScore>mikeyScore){
+            if (yokoScore>mikeyScore){
+                roller[3]="yoko";
+                winner="yoko";
+                if(streakName == "yoko"){roller[4]=streakCount + 1}else{roller[4]=1};
+            }
+            if (mikeyScore>yokoScore){
+                roller[3]="mikey";
+                winner="mikey";
+                if(streakName == "mikey"){roller[4]=streakCount + 1}else{roller[4]=1};
+            }
+            writeToFunmoneyDatabase(payOut);}
         if(mikeyScore == yokoScore){roller[3] = "tie"; gameTie = true; writeToFunmoneyDatabase(.25);}
         payoutPrevious = new Date();
     }
@@ -301,7 +312,7 @@ function writeToFunmoneyDatabase(amount){
     mikeyHistory = historyAll["mikey"].split(',');
     yokoHistory= historyAll["yoko"].split(',');
     amount = parseFloat(amount);
-    if (currentRollerMikey || gameTie || oneSidedGameWin == "mikey"){
+    if (gameTie || winner == "mikey"){
         mikeyMoney = parseFloat(mikeyMoney);
         mikeyMoney = mikeyMoney + amount;
         junk = mikeyHistory.unshift(amount);
@@ -314,7 +325,7 @@ function writeToFunmoneyDatabase(amount){
             mikey : mikeyMoney
         }, { merge: true });
     }
-    if (!currentRollerMikey || gameTie || oneSidedGameWin == "yoko"){
+    if (gameTie || winner == "yoko"){
         yokoMoney = parseFloat(yokoMoney);
         yokoMoney = yokoMoney + amount;
         junk = yokoHistory.unshift(amount);
