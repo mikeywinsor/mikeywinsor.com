@@ -272,11 +272,11 @@ function computeDiceRoll(){
     let payOut = .5;
     if(currentRollerMikey){
         roller = ["mikey","mDate", false,"mikey",1];
-        if(yokoScore == 0){roller[2] = true};
+        if(yokoScore == 0){roller[2] = true; roller[3] = streakName; roller[4]= streakCount};
         if(streakName == "mikey"){roller[4]=streakCount + 1}
     }else {
         roller = ["yoko","yDate",false,"yoko",1];
-        if(mikeyScore == 0){roller[2] = true};
+        if(mikeyScore == 0){roller[2] = true; roller[3] = streakName; roller[4]= streakCount};
         if(streakName == "yoko"){roller[4]=streakCount + 1}
     }
     if(mikeyScore != 0 && yokoScore != 0){
@@ -296,6 +296,7 @@ function computeDiceRoll(){
         if(mikeyScore == yokoScore){roller[3] = "tie"; gameTie = true; writeToFunmoneyDatabase(.25);}
         payoutPrevious = new Date();
     }
+
     docLastRoll.set({
         [roller[0]] : lastDiceRoll,
         [roller[1]] : rightNow,
