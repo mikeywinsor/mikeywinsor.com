@@ -280,7 +280,6 @@ function computeDiceRoll(){
         if(mikeyScore == 0){roller[2] = true; roller[3] = streakName; roller[4]= streakCount};
     }
     if(mikeyScore != 0 && yokoScore != 0){
-        if(streakCount + 1 == 5){payout += 5; roller[4] = 1; celebrateStreak();}
         if(mikeyScore>yokoScore || yokoScore>mikeyScore){
             if (yokoScore>mikeyScore){
                 roller[3]="yoko";
@@ -292,8 +291,17 @@ function computeDiceRoll(){
                 winner="mikey";
                 if(streakName == "mikey"){roller[4]=streakCount + 1}else{roller[4]=1};
             }
-            writeToFunmoneyDatabase(payOut);}
-        if(mikeyScore == yokoScore){roller[3] = "tie"; gameTie = true; writeToFunmoneyDatabase(.25);}
+            if(roller[4] == 5){payout += 5; roller[4] = 1; celebrateStreak();}
+            writeToFunmoneyDatabase(payOut);
+        }
+        if(mikeyScore == yokoScore){
+            roller[3] = "tie";
+            if (streakName == "mikey" || streakName == "yoko"){
+                roller[4] = 1;
+            } 
+            gameTie = true; 
+            writeToFunmoneyDatabase(.25);
+        }
         payoutPrevious = new Date();
     }
 
