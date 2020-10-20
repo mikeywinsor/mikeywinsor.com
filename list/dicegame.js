@@ -136,7 +136,7 @@ function checkUnpaid(){
             winner = "yoko";
             newSameDate = yRollDate;
         }
-        if (streakName == winner){streakCount += 1}else{streakCount = 0};
+        if (streakName == winner){streakCount += 1}else{streakCount = 1};
         if(streakCount == 5){streakCount = 1; winnings+=5};
         writeToFunmoneyDatabase(winnings);
         dbAllDatesUpdate(newSameDate);
