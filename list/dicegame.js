@@ -28,6 +28,10 @@ let yRollDate = '';
 let currentRollerMikey = '';
 let gameTie = false;
 let winner = "";
+let winnerPrinted = false;
+let bStyle = ["solid","groove","dashed","dotted"];
+let t="";
+let a = 0;
 
 let mikeyMoney = 0.01;
 var mikeyHistory = null;
@@ -35,6 +39,7 @@ let yokoMoney = 0.01;
 let yokoHistory = null;
 let funMoneyData = '';
 let historyAll = '';
+
 
 const diceArea = document.getElementById('diceArea');
 const diceM = document.getElementById('dice-M');
@@ -44,6 +49,8 @@ const yRollButton = document.getElementById('yokoRollButton');
 const mRollButton = document.getElementById('mikeyRollButton');
 const loginBlock = document.getElementById('login');
 const streakDiv = document.getElementById('streak');
+const mColumn = document.getElementById("m-column");
+const yColumn = document.getElementById("y-column")
 
 const isToday = (compareDate) => {
     const today = new Date()
@@ -159,10 +166,35 @@ function displayLogin(){
     loginBlock.style.display = 'block';
 }
 
-
 function updateScoresOnDice(){
     diceM.src = mikeyScore + `.png`;
     diceY.src = yokoScore + `.png`;
+    if(mikeyScore != 0 && yokoScore != 0){
+        if (mikeyScore>yokoScore && !winnerPrinted){
+            mColumn.innerHTML += "Winner";
+            winnerPrinted = true;
+            t = setInterval("winnerAni(mColumn)",500);
+        }
+        if (yokoScore>mikeyScore && !winnerPrinted){
+            yColumn.innerText += "Winner";
+            winnerPrinted = true;
+            t = setInterval("winnerAni(yColumn)",500);
+        }
+    }
+}
+
+function winnerAni(box){
+    let rand = makeRandoColor();
+    box.style = `background-color:${rand}; border-style:${bStyle[a]}`;
+    a ++;
+    if(a>=4){a=0};
+}
+
+function makeRandoColor(){
+    var rc = 'rgb(' + (Math.floor((256-229)*Math.random()) + 230) + ',' + 
+    (Math.floor((256-190)*Math.random()) + 220) + ',' + 
+    (Math.floor((256-190)*Math.random()) + 200) + ')';
+    return rc;
 }
 
 function rollDice(){
