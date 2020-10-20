@@ -384,6 +384,7 @@ function writeToFunmoneyDatabase(amount){
 
 function celebrateStreak(){
     console.log('good job');
+    alert("$5 streak win");
 }
 
 function loadFunMoney(){
