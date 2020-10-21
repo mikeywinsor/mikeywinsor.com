@@ -176,7 +176,7 @@ function updateScoresOnDice(){
             t = setInterval("winnerAni(mColumn)",500);
         }
         if (yokoScore>mikeyScore && !winnerPrinted){
-            yColumn.innerText += "Winner";
+            yColumn.innerHTML += "Winner";
             winnerPrinted = true;
             t = setInterval("winnerAni(yColumn)",500);
         }
