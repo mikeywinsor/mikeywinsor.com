@@ -168,8 +168,6 @@ function writeHistoryDB(newHistory,newBalance){
 }
 
 
-
-
 // LOGIN 
 
 loginButton.addEventListener("click",login);
