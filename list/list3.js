@@ -305,10 +305,10 @@ function addTitleSubmit(n){
         canUndo = false;
         inputField.value = null;
         inputBlock.style.backgroundColor = "rgba(24, 24, 24, 0.6)";        
-        masterList.splice(n+1,0,"t");
-        masterList.splice(n+2,0,inputValue);
-        masterList.splice(n+3,0,"i");
-        masterList.splice(n+4,0,"empty");
+        masterList.splice(n,0,"t");
+        masterList.splice(n+1,0,inputValue);
+        masterList.splice(n+2,0,"i");
+        masterList.splice(n+3,0,"empty");
         updateDB();
     }
 }
