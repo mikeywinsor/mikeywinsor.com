@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Checklist Mobile</title>
+    <title>Christmas List</title>
     <link rel="shortcut icon" href="icon.ico">
 
     <style>
         .grid-container {
+            overflow: hidden;
             display: grid;
             grid-template-columns: 10% 10% 10% 50% 20%;
-            background-color: rgb(32, 32, 32);
             padding: 10px;
         }
 
         .navi-block {
             display: inline-block;
-            background-color: rgb(41, 41, 41);
+            background-color: rgba(57, 100, 37, .88);
             padding: 2px;
             text-align: right;
             grid-column: 1/6;
@@ -36,9 +36,9 @@
 
         .name-box {
             display: inline-block;
-            background-color: lightslategrey;
+            background-color: rgb(60, 148, 75);
             grid-column: 1/5;
-            border-color: rgb(35, 62, 88);
+            border-color: rgb(34, 119, 39);
             padding: 6px;
             border-style: solid;
             color: rgb(15, 15, 15);
@@ -60,27 +60,17 @@
             text-align: center;
         }
 
-        .title-box {
-            display: inline-block;
-            grid-column: 2/5;
-            background-color: rgb(90, 90, 90);
-            border-color: rgb(53, 53, 53);
-            padding: 6px;
-            border-style: solid;
-            color: rgb(210, 212, 206);
-            font-size: 19px;
-        }
-
         .input-box {
             position: fixed;
             top: 30%;
             left: 15%px;
             width: 80%;
             height: 160px;
-            color: lightslategrey;
-            background-color: rgba(24, 24, 24, 0.95);
+            color: rgb(82, 3, 3);
+            background-color: #ad3a32;
+            font-size: 20px;
             border-style: solid;
-            border-color: darkslategray;
+            border-color: rgb(24, 216, 34);
             align-items: center;
             justify-content: center;
             padding: 15px;
@@ -91,11 +81,11 @@
 
         .plus-border {
             padding: 8px;
-            background-color: black;
+            background-color: rgb(24, 134, 34);
             border-style: solid;
             border-width: 4px;
-            border-color: gray;
-            color: gray;
+            border-color: rgb(39, 189, 51);
+            color: rgb(90, 0, 0);
         }
 
         .undo-box {
@@ -114,13 +104,13 @@
         .item-box {
             display: inline-block;
             grid-column: 3/5;
-            background-color: rgb(110, 110, 110);
-            border-color: rgb(78, 78, 78);
-            padding: 10px;
+            background-color: rgba(110, 110, 110, .88);
+            border-color: rgb(148, 34, 34);
+            padding: 6px;
             text-align: center;
             border-style: solid;
             color: honeydew;
-            font-size: 18px;
+            font-size: 14px;
         }
 
         .empty-item {
@@ -140,7 +130,65 @@
             justify-content: center;
             grid-column: 5/6;
         }
+
+        @import url('https://fonts.googleapis.com/css?family=Cookie');
+
+        body {
+            background-color: #F24236;
+            width: 100%;
+            font-family: 'Cookie', cursive;
+        }
+
+        .container {
+            overflow: hidden;
+            position: absolute;
+            top: 10%;
+            left: 0px;
+        }
+
+        #days {
+            font-size: 16px;
+            color: rgb(104, 206, 56);
+            text-align: center;
+        }
+
+        .drop {
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            opacity: 0;
+        }
+
+        .snow {
+            overflow: hidden;
+            height: 8px;
+            width: 8px;
+            border-radius: 100%;
+            background-color: #FFF;
+            box-shadow: 0 0 10px #FFF
+        }
+
+
+        .animate {
+            animation: falling 8.5s infinite ease-in;
+        }
+
+
+        @keyframes falling {
+            0% {
+                top: 0;
+                opacity: 1;
+            }
+
+            100% {
+                top: 460px;
+                opacity: 0
+            }
+        }
     </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -170,22 +218,26 @@
 <script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
 
-<body style="background-color:black;">
+<body>
+    <div class="container">
+
+    </div>
 
     <div class="input-box" id="input-box">
+        <div id=input-text></div>
         <div style='display: flex; float: right;' onclick="closeInput()"><img src='delete.png'></div>
         </br></br>
-        <input type="text" size='20' placeholder="" id="input-field"
-            style="height:30px; background-color: lightgrey;"></br></br>
-        <div class='plus-border' style='display: inline-block;'><img src='plus.png'></div>
+        <input type="text" size='20' placeholder="" id="input-field" style="height:30px;"></br></br>
+        <div class='plus-border' style='display: inline-block;'><img src='minus.png' onclick="pressMinus()"></div>
 
     </div>
 
     <div class="grid-container" id="grid">
         <div class='navi-block'>
-            <div style="float: left; color: darkgrey;">List 2.0</div> <a href="funmoney.html"><img src="fun.png"></a> <a
-                href="budget.html"><img src="budget.png"></a> <a href="dicegame.html"><img src="5.png"></a><a
-                href="christmas.html"><img src="christmas.png"></a>
+            <div style="float: left">
+                <p id="days"></p>
+            </div><a href="list3.html"><img src="list.png"></a> <a href="funmoney.html"><img src="fun.png"></a> <a
+                href="budget.html"><img src="budget.png"></a> <a href="dicegame.html"><img src="5.png"></a>
         </div>
     </div>
     <div class="top" id='top'>
@@ -199,7 +251,8 @@
         <button id='loginButton'>Login</button>
     </div>
 
-    <script src="list3.js"></script>
+    <script src="christmas.js"></script>
+    <script language="JavaScript" type="text/javascript" src="christmas-snow.js"></script>
 </body>
 
 </html>
