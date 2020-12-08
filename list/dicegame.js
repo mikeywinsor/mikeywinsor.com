@@ -50,7 +50,9 @@ const mRollButton = document.getElementById('mikeyRollButton');
 const loginBlock = document.getElementById('login');
 const streakDiv = document.getElementById('streak');
 const mColumn = document.getElementById("m-column");
-const yColumn = document.getElementById("y-column")
+const yColumn = document.getElementById("y-column");
+const miTo = document.getElementById("miTo");
+const yoTo = document.getElementById("yoTo");
 
 const isToday = (compareDate) => {
     const today = new Date()
@@ -101,6 +103,8 @@ function fetchDataRefresh(){
             yRollDate = new Date(allDiceData["yDate"].toDate());
             mikeyScore = allDiceData["mikey"];
             yokoScore = allDiceData["yoko"];
+            miTo.innerHTML = "mikey total: " + allDiceData.mTotal;
+            yoTo.innerHTML = "yoko total: " +allDiceData.yTotal;
             updateStreak();
             if (isToday(lastPayoutDate)){
                 noMorePayouts(); 
@@ -151,10 +155,15 @@ function checkUnpaid(){
 }
 
 function dbAllDatesUpdate(newDate){
+    let newTotal = 0;
+    let peTo = "mTotal";
+    if (winner == "mikey"){newTotal = allDiceData.mTotal + 1}
+    if (winner == "yoko"){newTotal = allDiceData.yTotal +1; peTo = "yTotal";}
     docLastRoll.set({
         oneRollToday : false,
         yDate : newDate,
         mDate : newDate,
+        [peTo] : newTotal,
         previousRewardDate : newDate,
         streakWho : winner,
         streakCount : streakCount
@@ -311,16 +320,21 @@ function computeDiceRoll(){
         if(streakName == "yoko"){roller[4]=streakCount + 1}
         if(mikeyScore == 0){roller[2] = true; roller[3] = streakName; roller[4]= streakCount};
     }
+    let peTo = "mTotal";
+    let totalNumber = allDiceData.mTotal;
     if(mikeyScore != 0 && yokoScore != 0){
         if(mikeyScore>yokoScore || yokoScore>mikeyScore){
             if (yokoScore>mikeyScore){
                 roller[3]="yoko";
                 winner="yoko";
+                totalNumber = allDiceData.yTotal + 1;
+                peTo = "yTotal";
                 if(streakName == "yoko"){roller[4]=streakCount + 1}else{roller[4]=1};
             }
             if (mikeyScore>yokoScore){
                 roller[3]="mikey";
                 winner="mikey";
+                totalNumber = allDiceData.mTotal + 1;
                 if(streakName == "mikey"){roller[4]=streakCount + 1}else{roller[4]=1};
             }
             if(roller[4] == 5){payout += 5; roller[4] = 1; celebrateStreak();}
@@ -340,6 +354,7 @@ function computeDiceRoll(){
     docLastRoll.set({
         [roller[0]] : lastDiceRoll,
         [roller[1]] : rightNow,
+        [peTo] : totalNumber,
         oneRollToday : roller[2],
         streakWho : roller[3],
         streakCount : roller[4],
