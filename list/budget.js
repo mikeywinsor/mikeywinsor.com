@@ -149,10 +149,16 @@ function clickAdd(){
 }
 
 function transactionSubmit(){
-    let newTransaction = transPrice.value + ", " + transPlace.value;
-    console.log(newTransaction);
-    let balanceAdjust = (allData["balance"] - transPrice.value);
-    writeHistoryDB(newTransaction,balanceAdjust);
+    let n = parseInt(transPrice.value);
+    if (n){
+        let newTransaction = transPrice.value + ", " + transPlace.value;
+        console.log(newTransaction);
+        let balanceAdjust = (allData["balance"] - transPrice.value);
+        writeHistoryDB(newTransaction,balanceAdjust);
+    }else{
+        alert("Not a valid number");
+    }
+
 }
 
 function writeHistoryDB(newHistory,newBalance){
