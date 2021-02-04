@@ -97,10 +97,12 @@ function printHistory(){
     let lNo = '';
     while (i < 4) {
         // Add each row of history 
-        mBal -= mikeyHistory[i];
+        mBal -= parseFloat(mikeyHistory[i]);
+        mBal = mBal.toFixed(2);
         newBalanceItem = ` . <div class='balance-item' style="display:in-line block;"> ${mBal}</div>`;
         mBlock.insertAdjacentHTML("beforeend",newBalanceItem);
-        lNo = mikeyHistory[i];
+        lNo = parseFloat(mikeyHistory[i]);
+        lNo = lNo.toFixed(2);
         if (lNo < 0){
             lNo = Math.abs(lNo);
             newAdjustItem = ` - <div class='minus-item' style=" display:in-line block;">${lNo}</div>`;
@@ -108,10 +110,12 @@ function printHistory(){
             newAdjustItem = ` + <div class='plus-item' style="display:in-line block;">${lNo}</div>`;
         };
         mBlock.insertAdjacentHTML("beforeend",newAdjustItem + smallSpace);
-        yBal -= yokoHistory[i];
+        yBal -= parseFloat(yokoHistory[i]);
+        yBal = yBal.toFixed(2);
         newBalanceItem = ` . <div class='balance-item' style="display:in-line block;">${yBal}</div>`;
         yBlock.insertAdjacentHTML("beforeend",newBalanceItem);
-        yNo = yokoHistory[i];
+        yNo = parseFloat(yokoHistory[i]);
+        ylNo = yNo.toFixed(2);
         if (yNo < 0){
             yNo = Math.abs(yNo);
             newAdjustItem = ` - <div class='minus-item' style="display:in-line block;">${yNo}</div>`;

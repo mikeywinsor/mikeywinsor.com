@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> </title>
+</head>
+<style>
+    .top-grid {
+        display: grid;
+        grid-template-columns: 40% 30% 30%;
+        background-color: lightgray;
+        padding: 6px;
+    }
+
+    .topper {
+        background-color: rgb(207, 198, 175);
+        border-style: solid;
+        border-color: rgb(158, 158, 104);
+        grid-column: 1/2;
+        padding: 14px;
+        font-size: 20px;
+    }
+
+    .navi-block {
+        grid-column: 2/4;
+        padding: 2px;
+    }
+
+    .create-new-block {
+        background-color: rgb(166, 204, 206);
+        border-style: solid;
+        border-color: rgb(131, 192, 194);
+        grid-column: 1/4;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: 1% 14% 14% 14% 14% 14% 14% 14% 1%;
+    }
+
+    .d1 {
+        grid-column: 2/3;
+        border-style: solid;
+        border-color: rgb(194, 194, 97);
+    }
+
+    .d2 {
+        grid-column: 3/4;
+        border-style: solid;
+        border-color: lightblue;
+    }
+
+    .d3 {
+        grid-column: 4/5;
+        border-style: solid;
+        border-color: lightblue;
+    }
+
+    .d4 {
+        grid-column: 5/6;
+        border-style: solid;
+        border-color: lightblue;
+    }
+
+    .d5 {
+        grid-column: 6/7;
+        border-style: solid;
+        border-color: lightblue;
+    }
+
+    .d6 {
+        grid-column: 7/8;
+        border-style: solid;
+        border-color: lightblue;
+    }
+
+    .d7 {
+        grid-column: 8/9;
+        border-style: solid;
+        border-color: rgb(133, 197, 74);
+    }
+
+    .login {
+        display: none;
+        padding: 20px;
+        border: darkgray;
+        border-style: double;
+        background: cadetblue;
+    }
+
+    .day-view {
+        display: grid;
+        position: absolute;
+        top: 112px;
+        width: 83%;
+        height: 300px;
+        padding: 15px;
+        border-style: solid;
+        border-color: rgb(216, 210, 203);
+        background-color: rgb(234, 228, 221);
+        z-index: top;
+    }
+
+    .day-date-number {
+        display: flex;
+        float: left;
+        white-space: pre;
+        align-items: left;
+        grid-column: 1/2;
+    }
+
+    .x {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+
+    .plus {
+        position: absolute;
+        top: 88%;
+        left: 8px;
+    }
+
+    .day-items {
+        position: absolute;
+        top: 12%;
+        left: 6%;
+        display: block;
+        align-content: top;
+    }
+
+    .past-date-red {
+        background:
+            linear-gradient(to top right,
+                rgba(255, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0) calc(50% - 0.8px),
+                rgb(255, 0, 0) 50%,
+                rgba(0, 0, 0, 0) calc(50% + 0.8px),
+                rgba(255, 0, 0, 0) 100%);
+    }
+
+    .past-date-blue {
+        background:
+            linear-gradient(to top left,
+                rgba(255, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 0) calc(50% - 2px),
+                rgb(34, 153, 207) 50%,
+                rgba(0, 0, 0, 0) calc(50% + 2px),
+                rgba(255, 0, 0, 0) 100%);
+    }
+</style>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyA4FOGL6w5-Ih-Lf8LBlHLnzP6tr9iPOp0",
+        authDomain: "shoplist-ee208.firebaseapp.com",
+        databaseURL: "https://shoplist-ee208.firebaseio.com",
+        projectId: "shoplist-ee208",
+        storageBucket: "shoplist-ee208.appspot.com",
+        messagingSenderId: "47295770360",
+        appId: "1:47295770360:web:26484ccc456656bbb0150d",
+        measurementId: "G-QKW1E6ZD1V"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
+
+<body>
+    <div class="top-grid">
+        <div class="topper">Calendar</div>
+        <div class='navi-block'> <a href="list3.html"><img src="list.png"></a> <a href="funmoney.html"><img
+                    src="fun.png"></a> <a href="budget.html"><img src="budget.png"></a> <a href="dice2.html"><img
+                    src="5.png"></a>
+        </div>
+        <div class='create-new-block'><img src="plus.png"><span style="padding: 5px;"></span>Create New</div>
+    </div>
+    <div class='calendar-grid' id='calendarChart'>
+        loading...
+    </div>
+    <div class='login' id='login-block'>
+        <input type="text" size='25' placeholder="email" id="emailField">
+        </br>
+        <input type="password" size='25' placeholder="password" id="passField">
+        </br>
+        <button id='loginButton'>Login</button>
+    </div>
+    <div class='pop-up' id='popUp'>
+        <input type="checkbox" id="checkboxTest" value="test">
+        <label for="checkBoxTest">This is a test</label>
+    </div>
+    <div id='day-view-window' class='day-view'>
+        <div class='x'><a onclick="closeDayViewWindow()"><img src="x.png"></a></div>
+        <div class='plus' id='day-plus'><a onclick="dayViewWindowPlus()"><img src="plus.png"></a></div>
+        <div id='date-number' class='day-date-number'>##-##-####</div>
+        <div id='day-contents' class="day-items">Here are some day contents</div>
+    </div>
+
+
+    <script src="calendar.js"></script>
+</body>
+
+</html>
