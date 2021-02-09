@@ -138,8 +138,8 @@ function loadFunMoney(){
     docFM.get().then(function(doc) {
         if (doc.exists) {
             funMoneyData = doc.data(); 
-            mikeyMoney = funMoneyData.mikey.toFixed(2);
-            yokoMoney = funMoneyData.yoko.toFixed(2);
+            mikeyMoney = funMoneyData.mikey;
+            yokoMoney = funMoneyData.yoko;
         } else {
             console.log("No such document!");
         }
@@ -397,8 +397,9 @@ function writeToFunmoneyDatabase(who,amount){
     yokoHistory= historyAll["yoko"].split(',');
     amount = parseFloat(amount);
     if (who == "mikey"){
-        mikeyMoney = parseFloat(mikeyMoney);
+        mikeyMoney = mikeyMoney * 1;
         mikeyMoney += amount;
+        let newBal = (mikeyMoney.toFixed(2)).toString();
         junk = mikeyHistory.unshift(amount.toString());
         junk = mikeyHistory.pop();
         let toAppend = mikeyHistory.toString();
@@ -406,12 +407,13 @@ function writeToFunmoneyDatabase(who,amount){
             mikey : toAppend
         }, { merge: true });
         docFM.set({
-            mikey : mikeyMoney
+            mikey : newBal
         }, { merge: true });
     }
     if (who == "yoko"){
-        yokoMoney = parseFloat(yokoMoney);
+        yokoMoney = yokoMoney * 1;
         yokoMoney += amount;
+        let newBal = (yokoMoney.toFixed(2)).toString();
         junk = yokoHistory.unshift(amount.toString());
         junk = yokoHistory.pop();
         let toAppend = yokoHistory.toString();
@@ -419,7 +421,7 @@ function writeToFunmoneyDatabase(who,amount){
             yoko : toAppend
         }, { merge: true });
         docFM.set({
-           yoko : yokoMoney
+           yoko : newBal
         }, { merge: true });
     }
     // console.log(amount);
