@@ -41,7 +41,7 @@ function pageLoad() {
           // User is signed in.
           //console.log('signed in');
           loginBlock.style.display = 'none';
-          docHistory.onSnapshot(function(doc) {refreshPage();});
+          docRef.onSnapshot(function(doc) {refreshPage();});
           refreshPage();
         } else {
           // No user is signed in.
@@ -165,44 +165,41 @@ balanceInput.addEventListener("keydown", function(event) {
 
 
 function addToBalance(){
-    if (balanceBar.value){
-        if (mikeySelected){
-            updateBalances(balanceBar.value);
-        } else {
-            updateBalances(balanceBar.value);
-        }
+    if (balanceBar.value && !isNaN(balanceBar.value)){
+        updateBalances(balanceBar.value);
     }
 }
 
 function updateBalances(amount){
     //console.log("name: " + name + " plus " + amount);
     let junk = '';
-    amount = parseFloat(amount);
+    let numAm = amount * 1;
+    console.log(numAm + " :amount", typeof numAm);
     if (mikeySelected){
-        mikeyMoney = parseFloat(mikeyMoney);
-        mikeyMoney = mikeyMoney + amount;
+        mikeyMoney = mikeyMoney * 1;
+        mikeyMoney += numAm;
+        let newBalString = (mikeyMoney.toFixed(2)).toString();
         junk  = mikeyHistory.unshift(amount);
         junk = mikeyHistory.pop();
-        console.log(mikeyHistory);
         let toAppend = mikeyHistory.toString();
         docHistory.set({
             mikey : toAppend
         }, { merge: true });
         docRef.set({
-            mikey : mikeyMoney
+            mikey : newBalString
         }, { merge: true });
     }else{
-        yokoMoney = parseFloat(yokoMoney);
-        yokoMoney = yokoMoney + amount;
+        yokoMoney = yokoMoney * 1;
+        yokoMoney += numAm;
+        let newBalString = (yokoMoney.toFixed(2)).toString();
         junk  = yokoHistory.unshift(amount);
         junk = yokoHistory.pop();
-        console.log(yokoHistory);
         let toAppend = yokoHistory.toString();
         docHistory.set({
             yoko : toAppend
         }, { merge: true });
         docRef.set({
-           yoko : yokoMoney
+           yoko : newBalString
         }, { merge: true });
     };
     cancelAdd();

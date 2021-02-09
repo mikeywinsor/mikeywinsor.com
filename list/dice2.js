@@ -138,8 +138,8 @@ function loadFunMoney(){
     docFM.get().then(function(doc) {
         if (doc.exists) {
             funMoneyData = doc.data(); 
-            mikeyMoney = funMoneyData.mikey;
-            yokoMoney = funMoneyData.yoko;
+            mikeyMoney = funMoneyData.mikey.toFixed(2);
+            yokoMoney = funMoneyData.yoko.toFixed(2);
         } else {
             console.log("No such document!");
         }
