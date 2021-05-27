@@ -111,7 +111,7 @@ function loadBalances(){
     let i = 0;
     historyPosition = 0;
     let numB = allData["vacation"];
-    vacationBalance.innerText = '$' +(Math.round(numB * 100) / 100).toFixed(2);
+    vacationBalance.innerText = '$' + (Math.round(numB * 100) / 100).toFixed(2);
     printHistory(i,8);
 }
 
