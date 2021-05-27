@@ -12,6 +12,7 @@ const budgetBalance = document.getElementById("budgetBalance");
 const placeHistory = document.getElementById("history");
 const historyPrices = document.getElementById("historyPrices");
 const historyPlaces = document.getElementById("historyPlaces");
+const vacationBalance = document.getElementById("vacationAmount");
 const transBlock = document.getElementById("inputTransactionBlock");
 let transBlockVisible = false;
 const transPlace = document.getElementById("inputTransactionPlace");
@@ -109,6 +110,8 @@ function loadBalances(){
     transPlace.value = '';
     let i = 0;
     historyPosition = 0;
+    let numB = allData["vacation"];
+    vacationBalance.innerText = '$' +(Math.round(numB * 100) / 100).toFixed(2);
     printHistory(i,8);
 }
 
@@ -149,25 +152,47 @@ function clickAdd(){
 }
 
 function transactionSubmit(){
-    let n = parseInt(transPrice.value);
+    let n = parseFloat(transPrice.value);
     if (n){
         let newTransaction = transPrice.value + ", " + transPlace.value;
-        console.log(newTransaction);
-        let balanceAdjust = (allData["balance"] - transPrice.value);
-        writeHistoryDB(newTransaction,balanceAdjust);
+        let balanceAdjust = (allData["balance"] - n);
+        let vacationBalanceAdjust = (allData["vacation"]);
+        vacationBalanceAdjust += n;
+        if (transPlace.value.split(' ')[0] == 'vacation' || transPlace.value.split(' ')[0] == 'Vacation'){
+            if (n > 0){
+                writeHistoryDBV(newTransaction,balanceAdjust, vacationBalanceAdjust);
+            } else if (n < 0){
+                balanceAdjust = (allData["balance"]);
+                writeHistoryDBV(newTransaction, balanceAdjust, vacationBalanceAdjust);
+            }
+        }else{
+            writeHistoryDB(newTransaction,balanceAdjust);
+        }
     }else{
         alert("Not a valid number");
     }
 
 }
+function writeHistoryDBV(newHistory,newBalance, newVacation){
+    let newArrayHistory = allData["history"].unshift(newHistory);
+    let removdItemFromHistory = allData["history"].pop();
+    console.log(" removed item from history " + removdItemFromHistory);
+    console.log(newArrayHistory);
+    docRef.set({
+        history : allData['history'],
+        balance : newBalance,
+        vacation : newVacation
+    }, { merge: true }
+    );
+}
 
 function writeHistoryDB(newHistory,newBalance){
     let newArrayHistory = allData["history"].unshift(newHistory);
+    let removdItemFromHistory = allData["history"].pop();
+    console.log(" removed item from history " + removdItemFromHistory);
     console.log(newArrayHistory);
     docRef.set({
-        history : allData['history']
-    }, { merge: true });
-    docRef.set({
+        history : allData['history'],
         balance : newBalance
     }, { merge: true }
     );
