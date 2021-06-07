@@ -1,14 +1,67 @@
-<!-- To add a painting to site -->
-<!--  add jpeg painting to painting folder  RUN batch on PSP 150 thumb  -->
-<!--  add function for painting and specs-->
-<!--  add painting to List of paintings-->
-<!--  to specify order from start add function to ror, do not duplicate in ord -->
+//To add a painting to site -->
+//  add jpeg painting to painting folder  RUN batch on PSP 150 thumb  -->
+//  add function for painting and specs-->
+//  add painting to List of paintings-->
+//  to specify order from start add function to ror, do not duplicate in ord -->
 
 function pageload(){
 	p();}
 
-<!-- Paintings            -->
-<!-- Info to Variables    -->
+//<!-- Paintings            -->
+//<!-- Info to Variables    -->
+function aholeinleadership(){
+	title="A Hole in Leadership";
+	specs="oil on paper,</br>11 x 14 in, 2021";
+	loc="a_hole_in_leadership";}
+function blinkofaneye(){
+	title="Blink of an Eye";
+	specs="oil on canvas,</br>36 x 24 in, 2020";
+	loc="blink_of_an_eye";}
+function moistair(){
+	title="Moist Air";
+	specs="oil on canvas,</br>48 x 36 in, 2020";
+	loc="moist_air";}
+function mixitup(){
+	title="Mix it Up";
+	specs="oil on canvas,</br>36 x 24 in, 2020";
+	loc="mix_it_up";}
+function petalpower(){
+	title="Petal Power";
+	specs="oil on canvas,</br>36 x 24 in, 2020";
+	loc="petal_power";}
+function nightlife(){
+	title="Night Life";
+	specs="oil on paper,</br>14 x 11 in, 2020";
+	loc="night_life";}
+function downthehatch(){
+	title="Down the Hatch";
+	specs="oil on canvas,</br>40 x 30 in, 2021";
+	loc="down_the_hatch";}
+function float(){
+	title="Float";
+	specs="oil on canvas,</br>36 x 24 in, 2021";
+	loc="float";}
+function holeinthecity(){
+	title="Hole in the City";
+	specs="oil on paper,</br>14 x 11 in, 2021";
+	loc="hole_in_the_city";}
+function livelytime(){
+	title="Lively Time";
+	specs="oil on paper,</br>11 x 14 in, 2021";
+	loc="lively_time";}
+function onwardchannel(){
+	title="Onward Channel";
+	specs="oil on panel,</br>16 x 20 in, 2021";
+	loc="onward_channel";}
+function suffusingtheseed(){
+	title="Suffising the Seed";
+	specs="oil on paper,</br>11 x 14 in, 2021";
+	loc="suffusing_the_seed";}
+
+
+
+
+	
 function seedless(){
 	title="Seedless";
 	specs="oil on paper,</br>12 x 9 in, 2020";
@@ -193,12 +246,20 @@ function anopenwindow(){
 	title="An Open Window";
 	specs="oil on canvas,</br>36 x 24 in, 2019";
 	loc="an_open_window";}
-<!--    Painting Random Order         -->
-ord = [enroutetobreakfast,anothersummerdone,fromthebalcony,lunarzenith,turnaleaf,waterfall,thesunandthemoon,afeast,deepinthenight,edgesofhistory,gatheringclouds,onsynth,somethingemerges,itabides,happybirthday,grapplecoilandbite,eatyou,intravenous,plantinacup,sweetsweetnectar,aspring,bedtimestory,mudflap,takenbynotus,taxes,cityonisland,elephantsatriver,lasthikeofsummer,havesomemore,cleansheets,crystalballs,aplacetorest,oceanmeetearth,iceontheburn,akid,coralontherocks,deepsunlight,upthere,blush,anopenwindow,headintheclouds,thegathering,seedless];
+
+//<!--    Painting Random Order         -->
+
+	ord = [march,bolt,seastroll,aholeinleadership,blinkofaneye,mixitup,petalpower,nightlife,holeinthecity,
+		enroutetobreakfast,anothersummerdone,
+		fromthebalcony,lunarzenith,turnaleaf,waterfall,thesunandthemoon,afeast,deepinthenight,edgesofhistory,
+		gatheringclouds,onsynth,somethingemerges,itabides,happybirthday,grapplecoilandbite,eatyou,intravenous,
+		plantinacup,sweetsweetnectar,aspring,bedtimestory,mudflap,takenbynotus,taxes,cityonisland,elephantsatriver,
+		lasthikeofsummer,havesomemore,cleansheets,crystalballs,aplacetorest,oceanmeetearth,iceontheburn,akid,
+		coralontherocks,deepsunlight,upthere,blush,anopenwindow,headintheclouds,thegathering,seedless];
 var n = ord.length;
 var stp = [n]
   // Take values from ord (images in order) and place them in a random order into a new order in ror (random order)
-var ror = [march,bolt,seastroll];
+var ror = [downthehatch,float,livelytime,onwardchannel,moistair,suffusingtheseed];
 var pinOrder = ror.length;
  for ( var i = 0; i < n-pinOrder; i++ ) {
     ror.push(ord.splice(Math.floor(Math.random()*ord.length),1)[0]);
@@ -210,8 +271,8 @@ dimr = 0
 // Preload images (one pos  ahead)-->
 prld = 1
 
-<!-- Paintings                    -->
-<!--  Navigation                  -->
+//<!-- Paintings                    -->
+//<!--  Navigation                  -->
 var onMobile = false;
 function p(){
 	ror[pos]();
