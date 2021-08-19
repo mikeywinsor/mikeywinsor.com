@@ -192,12 +192,14 @@ function updateRollNumbers(){
         todayMikeyScore = mikeyLastRoll;
     }else if(playerName == "mikey"){
         hasntRolledToday = true;
+        leftColumn.innerHTML = `mikey<br><img src="nr.png">`;
     }
     if(isToday(yokoLastRollDate)){
         rightColumn.innerHTML = `yoko<br><img src="${yokoLastRoll}.png">`;
         todayYokoScore = yokoLastRoll;
     }else if(playerName == "yoko"){
         hasntRolledToday = true;
+        rightColumn.innerHTML = `yoko<br><img src="nr.png">`;
     }
     if(currentStreakWho == "yoko"){
         rightColumn.innerHTML = `yoko<br><img src="${yokoLastRoll}.png"><br>streak: ${currentStreakCount}`;
@@ -215,10 +217,17 @@ function updateRollNumbers(){
         if(currentStreakWho == playerName){
             playerWinnings = lastPayoutAmount;
         } else {playerWinnings = "nothing"};
-        rollingArea.innerHTML += `<br><div style="text-align: center; border-style: solid;
+        if (currentStreakWho == "tie"){
+            rollingArea.innerHTML += `<br><div style="text-align: center; border-style: solid;
+                                    border-color:white; background-color: rgb(199, 196, 189); position:absolute;
+                                    width: 33%; left: 33%;
+                                    ">Tie! <br><br>. . .<br>Today you won a Quarter!<br>...<div>`;
+        } else {
+            rollingArea.innerHTML += `<br><div style="text-align: center; border-style: solid;
                                     border-color:white; background-color: rgb(199, 196, 189); position:absolute;
                                     width: 33%; left: 33%;
                                     ">${playerName} <br><br>. . .<br>today you won ${playerWinnings}<br>...<div>`;
+        }
         if(currentStreakWho == "yoko"){t = setInterval("winnerAni(rightColumn)",500)}
         if(currentStreakWho == "mikey"){t = setInterval("winnerAni(leftColumn)",500)}
     }
