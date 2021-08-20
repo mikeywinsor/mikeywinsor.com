@@ -190,21 +190,21 @@ function updateRollNumbers(){
     if(isToday(mikeyLastRollDate)){
         leftColumn.innerHTML = `mikey<br><img src="${mikeyLastRoll}.png">`;
         todayMikeyScore = mikeyLastRoll;
-    }else if(playerName == "mikey"){
-        hasntRolledToday = true;
-        leftColumn.innerHTML = `mikey<br><img src="nr.png">`;
+    }else {
+        if(playerName == "mikey"){hasntRolledToday = true;}
+        leftColumn.innerHTML = `mikey<br><img src="nr.png">`
     }
     if(isToday(yokoLastRollDate)){
         rightColumn.innerHTML = `yoko<br><img src="${yokoLastRoll}.png">`;
         todayYokoScore = yokoLastRoll;
-    }else if(playerName == "yoko"){
-        hasntRolledToday = true;
-        rightColumn.innerHTML = `yoko<br><img src="nr.png">`;
+    }else {
+        if(playerName == "yoko"){hasntRolledToday = true;}
+        rightColumn.innerHTML = `yoko<br><img src="nr.png">`
     }
     if(currentStreakWho == "yoko"){
-        rightColumn.innerHTML = `yoko<br><img src="${yokoLastRoll}.png"><br>streak: ${currentStreakCount}`;
+        rightColumn.innerHTML += `<br>streak: ${currentStreakCount}`;
     }else if (currentStreakWho == "mikey"){
-        leftColumn.innerHTML = `mikey<br><img src="${mikeyLastRoll}.png"><br>streak: ${currentStreakCount}`;
+        leftColumn.innerHTML += `<br>streak: ${currentStreakCount}`;
     }
     if (hasntRolledToday){
         rollingArea.innerHTML += `<br><a onclick='rollDice()'><div style="text-align: center; border-style: solid;
@@ -212,6 +212,7 @@ function updateRollNumbers(){
                                     width: 33%; left: 33%;
                                     ">${playerName}<br><img src="${rolledDie}.png"></img><br>roll dice !!!<div></a>`;
     }
+
     if (isToday(lastPayoutDate)){
         let playerWinnings = null;
         if(currentStreakWho == playerName){
