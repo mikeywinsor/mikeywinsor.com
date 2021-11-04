@@ -7,8 +7,34 @@
 function pageload(){
 	p();}
 
-//<!-- Paintings            -->
-//<!-- Info to Variables    -->
+//<!-- Paintings             -->>
+//<!-- Info to Variables     -->>
+//<!latest update 2021-11-04 -->>
+function sunconsumingthenight(){
+	title="Sun Consuming the Night";
+	specs="oil on canvas,</br>30 x 40 in, 2021";
+	loc="sun_consuming_the_night";}
+function whisper(){
+	title="Whisper";
+	specs="oil on paper,</br>18 x 24 in, 2021";
+	loc="whisper";}
+	function birthofahurricane(){
+	title="Birth of a Hurricane";
+	specs="oil on paper,</br>24 x 18 in, 2021";
+	loc="birth_of_a_hurricane";}
+function betweenbites(){
+	title="Between Bites";
+	specs="oil on canvas,</br>36 x 24 in, 2021";
+	loc="between_bites";}
+function niterain(){
+	title="Nite Rain";
+	specs="oil on paper,</br>18 x 24 in, 2021";
+	loc="nite_rain";}
+function opensesame(){
+	title="Open Sesame";
+	specs="oil on canvas,</br>40 x 30 in, 2021";
+	loc="open_sesame";}
+
 function aholeinleadership(){
 	title="A Hole in Leadership";
 	specs="oil on paper,</br>11 x 14 in, 2021";
@@ -255,11 +281,12 @@ function anopenwindow(){
 		gatheringclouds,onsynth,somethingemerges,itabides,happybirthday,grapplecoilandbite,eatyou,intravenous,
 		plantinacup,sweetsweetnectar,aspring,bedtimestory,mudflap,takenbynotus,taxes,cityonisland,elephantsatriver,
 		lasthikeofsummer,havesomemore,cleansheets,crystalballs,aplacetorest,oceanmeetearth,iceontheburn,akid,
-		coralontherocks,deepsunlight,upthere,blush,anopenwindow,headintheclouds,thegathering,seedless];
+		coralontherocks,deepsunlight,upthere,blush,anopenwindow,headintheclouds,thegathering,seedless,
+		float,livelytime,onwardchannel,moistair,suffusingtheseed];
 var n = ord.length;
 var stp = [n]
   // Take values from ord (images in order) and place them in a random order into a new order in ror (random order)
-var ror = [downthehatch,float,livelytime,onwardchannel,moistair,suffusingtheseed];
+var ror = [opensesame, whisper, birthofahurricane, betweenbites, niterain, sunconsumingthenight, downthehatch];
 var pinOrder = ror.length;
  for ( var i = 0; i < n-pinOrder; i++ ) {
     ror.push(ord.splice(Math.floor(Math.random()*ord.length),1)[0]);
