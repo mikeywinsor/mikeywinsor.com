@@ -109,7 +109,8 @@ function refreshPage(){
                 width:90%; height: 80%; left : 5%; top : 10%; z-index : 100;"><br>
                 <a onclick='clearAlert("yoko")'><img src="x.png"></img>
                 <br><br><br><br>
-                previous win : ${historyWho} <br><br> $${historyAmount}</a></div>`;
+                previous win : ${historyWho} <br><br> $${historyAmount}</a></div>
+                <br><br><br><img height='34px' src='${historyM}.png'> v <img height='34px' src='${historyY}.png'>`;
                 mainGrid.insertAdjacentElement("afterbegin", textBlip);
             }else if (playerName == "mikey" && allRPSData.alertM){
                 let textBlip = document.createElement("html");
@@ -422,7 +423,7 @@ function computeWinnings(who){
         alertY : true
     }, { merge: true }
     );
-    // writeToFunmoneyDatabase(who, betAmount);
+     writeToFunmoneyDatabase(who, betAmount);
 };
 
 
