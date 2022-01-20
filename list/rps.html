@@ -4,28 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> </title>
+    <title>じゃんけん</title>
 </head>
 <style>
     body {
-        background-color: rgb(215, 225, 228);
+        background-color: rgb(68, 88, 94);
     }
 
     .main-grid {
         display: grid;
         grid-template-columns: 40% 20% 40%;
-        background-color: lightgray;
+        background-color: rgb(78, 85, 68);
         padding: 10px;
     }
 
     .topper {
-        background-color: rgb(151, 149, 144);
+        background-color: rgb(119, 101, 108);
         border-style: solid;
-        border-color: rgb(131, 131, 112);
+        border-color: rgb(214, 214, 153);
         grid-column: 1/2;
         color: cornsilk;
         padding: 10px;
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .navi-block {
@@ -36,12 +36,12 @@
     .wide-row {
         grid-column: 1/4;
         text-align: center;
-        border-color: rgb(209, 202, 184);
+        border-color: rgb(136, 126, 103);
         border-style: solid;
-        background-color: rgb(206, 206, 201);
+        background-color: rgb(115, 124, 109);
     }
 
-    .dice-grid {
+    .rps-grid {
         display: grid;
         grid-template-columns: 40% 20% 40%;
     }
@@ -49,10 +49,11 @@
     .left-column {
         display: inline-block;
         text-align: center;
-        height: 74px;
+        height: 38px;
         grid-column: 1/2;
+        color: cornsilk;
         padding: 4px;
-        background-color: rgb(199, 196, 189);
+        background-color: rgb(102, 100, 97);
         border-style: solid;
         border-color: rgb(155, 136, 117);
     }
@@ -60,10 +61,11 @@
     .right-column {
         display: inline-block;
         text-align: center;
-        height: 74px;
+        height: 38px;
         grid-column: 3/4;
+        color: cornsilk;
         padding: 4px;
-        background-color: rgb(199, 196, 189);
+        background-color: rgb(102, 100, 97);
         border-style: solid;
         border-color: rgb(155, 136, 117);
     }
@@ -72,11 +74,11 @@
         grid-column: 2/3;
         display: inline-block;
         text-align: center;
-        background-color: lightgray;
+        background-color: rgb(68, 88, 94);
         display: inline-block;
     }
 
-    .rolling-area {
+    .main-area {
         background-color: lightgray;
         border-style: solid;
         border-color: lightslategray;
@@ -166,30 +168,31 @@
 <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
 
 <body>
-    <div class="main-grid">
-        <div class="topper">Boogle Dice</div>
+    <div class="main-grid" id="main-grid">
+        <div class="topper">じゃんけん</div>
         <div class='navi-block'> <a href="list3.html"><img src="list.png"></a> <a href="funmoney.html"><img
-                    src="fun.png"></a> <a href="budget.html"><img src="budget.png"></a> <a href="rps.html"><img
-                    height='32px' src="scissors.png"></a></div>
+                    src="fun.png"></a> <a href="budget.html"><img src="budget.png"></a>
+            <a href="dice2.html"><img src="4.png"></a>
+        </div>
 
 
     </div>
-    <div class='dice-grid'>
-        <div id="left-column" class='left-column'>mikey<br><img src="0.png"></div>
+    <div class='rps-grid'>
+        <div id="left-column" class='left-column'>mikey<br></div>
         <div id='middle-column' class="middle-column"></div>
-        <div id="right-column" class='right-column'>yoko<br><img src="0.png"></div>
-        <div class="wide-row"><img src="1.png"> <img src="2.png"> <img src="3.png"> <img src="4.png"> <img src="5.png">
-            <img src="6.png">
+        <div id="right-column" class='right-column'>yoko<br></div>
+        <div class="wide-row" id="wide-row"><img src="rock.png"> - <img src="paper.png"> - <img src="scissors.png">
         </div>
     </div>
-    <div id='rolling-area' class="rolling-area">
+    <div id='main-area' class="main-area">
     </div>
     <div class='bottom-grid'>
-        <div id="left-bottom" class='left'>mikey<br>total</div>
-        <div id="right-bottom" class='right'>yoko<br>total</div>
+        <div id="left-bottom" class='left'>...</div>
+        <div id="right-bottom" class='right'>...</div>
         <div class='middle-span' id='historyBlock'></div>
         <div id="left-bottomB" class='left'></div>
         <div id="right-bottomB" class='right'></div>
+        <div class='middle-span' id='history-bottom'></div>
     </div>
     <div class='login' id='login-block'>
         <input type="text" size='25' placeholder="email" id="emailField">
@@ -199,7 +202,7 @@
         <button id='loginButton'>Login</button>
     </div>
 
-    <script src="dice2.js"></script>
+    <script src="rps.js"></script>
 </body>
 
 </html>

@@ -79,7 +79,7 @@ function pageLoad(){
             if (userEmail == "mikey@boogle.com" || userEmail == "m@boogle.com" || userEmail == "mm@boogle.com"){
                 playerName = "mikey";
             }
-            if (userEmail == "yoko@boogle.com" || userEmail == "pogo@boogle.com"){
+            if (userEmail == "yoko@boogle.com" || userEmail == "pogo@boogle.com" || userEmail =="y@boogle.com"){
                 playerName = "yoko";
             }
             docDice.onSnapshot(function(doc) {
