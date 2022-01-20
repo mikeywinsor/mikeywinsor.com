@@ -103,24 +103,9 @@ function refreshPage(){
             rightBottomB.innerHTML = `<img height='34px' src='${historyY}.png'>`;
             leftBottomB.innerHTML = `<img height='34px' src='${historyM}.png'>`;
             if (playerName == "yoko" && allRPSData.alertY){
-                let textBlip = document.createElement("html");
-                textBlip.innerHTML = `<div id="alert-box" style="text-align: center; border-style: solid;
-                border-color:white; background-color: rgb(199, 196, 189); position:absolute;
-                width:90%; height: 80%; left : 5%; top : 10%; z-index : 100;"><br>
-                <a onclick='clearAlert("yoko")'><img src="x.png"></img>
-                <br><br><br><br>
-                previous win : ${historyWho} <br><br> $${historyAmount}</a></div>
-                <br><br><br><img height='34px' src='${historyM}.png'> v <img height='34px' src='${historyY}.png'>`;
-                mainGrid.insertAdjacentElement("afterbegin", textBlip);
+                alertPastWin("yoko");
             }else if (playerName == "mikey" && allRPSData.alertM){
-                let textBlip = document.createElement("html");
-                textBlip.innerHTML = `<div id="alert-box" style="text-align: center; border-style: solid;
-                border-color:white; background-color: rgb(199, 196, 189); position:absolute;
-                width:90%; height: 80%; left : 5%; top : 10%; z-index : 100;"><br>
-                <a onclick='clearAlert("mikey")'><img src="x.png"></img>
-                <br><br><br><br>
-                previous win : ${historyWho} <br><br> $${historyAmount}</a></div>`;
-                mainGrid.insertAdjacentElement("afterbegin", textBlip);
+                alertPastWin("mikey");
             }
             if (playerM != 'null' && playerY != 'null'){console.log("both submitted")}
             if(onePersonPlayed){
@@ -181,6 +166,21 @@ function clearAlert(whoClear){
     }
 }
 
+function alertPastWin(person){
+    let textBlip = document.createElement("html");
+    textBlip.innerHTML = `<div id="alert-box" style="text-align: center; border-style: solid;
+    border-color:white; background-color: rgb(199, 196, 189); position:absolute;
+    width:90%; height: 80%; left : 5%; top : 10%; z-index : 100;"><br>
+    <a onclick='clearAlert("${person}")'><img src="x.png"></img>
+    <br><br><br>
+    previous win : ${historyWho} <br><br> $${historyAmount}</a>
+    <br><br>
+    <img src='${historyM}.png'><img src='empty.png'><img src='empty.png'><img src='${historyY}.png'>
+    <br>
+    mikey<img src='empty.png'><img src='empty.png'><img src='empty.png'>yoko
+    </div>`;
+    mainGrid.insertAdjacentElement("afterbegin", textBlip);
+}
 
 function loadFunMoney(){
     docFM.get().then(function(doc) {
@@ -428,10 +428,6 @@ function computeWinnings(who){
 
 
 
-
-
-
-
     // writeToFunmoneyDatabase("mikey",.25);
     // writeToFunmoneyDatabase("yoko",.25);
 
@@ -439,20 +435,34 @@ function computeWinnings(who){
 
 function writeToFunmoneyDatabase(who,amount){
     let junk = '';
+    let junkB = '';
+    let lostAmount = amount * -1;
     mikeyHistory = historyAll["mikey"].split(',');
     yokoHistory= historyAll["yoko"].split(',');
     amount = parseFloat(amount);
+    lostAmount = parseFloat(lostAmount);
     if (who == "mikey"){
+        // add money to mikey
         mikeyMoney = mikeyMoney * 1;
         mikeyMoney += amount;
         let newBal = (mikeyMoney.toFixed(2)).toString();
         junk = mikeyHistory.unshift(amount.toString());
         junk = mikeyHistory.pop();
         let toAppend = mikeyHistory.toString();
+        // minus money yoko
+        yokoMoney = yokoMoney * 1;
+        yokoMoney += lostAmount;
+        let newBalY = (yokoMoney.toFixed(2)).toString();
+        junkB = yokoHistory.unshift(lostAmount.toString());
+        junkB = yokoHistory.pop();
+        let toAppendY = yokoHistory.toString();
+        // write db
         docFMH.set({
+            yoko : toAppendY,
             mikey : toAppend
         }, { merge: true });
         docFM.set({
+            yoko : newBalY,
             mikey : newBal
         }, { merge: true });
     }
@@ -463,11 +473,21 @@ function writeToFunmoneyDatabase(who,amount){
         junk = yokoHistory.unshift(amount.toString());
         junk = yokoHistory.pop();
         let toAppend = yokoHistory.toString();
+        // mikey minus loss
+        mikeyMoney = mikeyMoney * 1;
+        mikeyMoney += lostAmount;
+        let newBalM = (mikeyMoney.toFixed(2)).toString();
+        junkB = mikeyHistory.unshift(lostAmount.toString());
+        junkB = mikeyHistory.pop();
+        let toAppendM = mikeyHistory.toString();
+        // write db
         docFMH.set({
-            yoko : toAppend
+            yoko : toAppend,
+            mikey : toAppendM
         }, { merge: true });
         docFM.set({
-           yoko : newBal
+            yoko : newBal,
+            mikey : newBalM
         }, { merge: true });
     }
     // console.log(amount);
