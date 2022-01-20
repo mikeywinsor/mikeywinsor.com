@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable = no">
+    <title>じゃんけん</title>
+</head>
+<style>
+    body {
+        background-color: rgb(68, 88, 94);
+    }
+
+    .main-grid {
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+        background-color: rgb(78, 85, 68);
+        padding: 10px;
+    }
+
+    .topper {
+        background-color: rgb(119, 101, 108);
+        border-style: solid;
+        border-color: rgb(214, 214, 153);
+        grid-column: 1/2;
+        color: cornsilk;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .navi-block {
+        grid-column: 2/4;
+        padding: 2px;
+    }
+
+    .wide-row {
+        grid-column: 1/4;
+        text-align: center;
+        border-color: rgb(136, 126, 103);
+        border-style: solid;
+        background-color: rgb(115, 124, 109);
+    }
+
+    .rps-grid {
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+    }
+
+    .left-column {
+        display: inline-block;
+        text-align: center;
+        height: 38px;
+        grid-column: 1/2;
+        color: cornsilk;
+        padding: 4px;
+        background-color: rgb(102, 100, 97);
+        border-style: solid;
+        border-color: rgb(155, 136, 117);
+    }
+
+    .right-column {
+        display: inline-block;
+        text-align: center;
+        height: 38px;
+        grid-column: 3/4;
+        color: cornsilk;
+        padding: 4px;
+        background-color: rgb(102, 100, 97);
+        border-style: solid;
+        border-color: rgb(155, 136, 117);
+    }
+
+    .middle-column {
+        grid-column: 2/3;
+        display: inline-block;
+        text-align: center;
+        background-color: rgb(68, 88, 94);
+        display: inline-block;
+    }
+
+    .main-area {
+        background-color: lightgray;
+        border-style: solid;
+        border-color: lightslategray;
+        height: 150px;
+    }
+
+    .bottom-grid {
+        display: grid;
+        grid-template-columns: 40% 20% 40%;
+    }
+
+    .left {
+        display: inline-block;
+        text-align: center;
+        height: 30px;
+        font-size: 13px;
+        grid-column: 1/2;
+        padding: 1px;
+        background-color: rgb(199, 196, 189);
+        border-style: solid;
+        border-color: rgb(155, 136, 117);
+    }
+
+    .right {
+        display: inline-block;
+        text-align: center;
+        height: 30px;
+        font-size: 13px;
+        grid-column: 3/4;
+        padding: 1px;
+        background-color: rgb(199, 196, 189);
+        border-style: solid;
+        border-color: rgb(155, 136, 117);
+    }
+
+    .middle-span {
+        display: inline-block;
+        text-align: center;
+        height: 18px;
+        font-size: 13px;
+        grid-column: 1/4;
+        padding: 1px;
+        background-color: rgb(199, 196, 189);
+        color: rgb(53, 50, 29);
+    }
+
+    .login {
+        display: none;
+        padding: 20px;
+        border: darkgray;
+        border-style: double;
+        background: cadetblue;
+    }
+
+    #miTo {
+        color: rgb(36, 70, 102);
+    }
+
+    #yoTo {
+        color: rgb(104, 37, 37);
+    }
+</style>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyA4FOGL6w5-Ih-Lf8LBlHLnzP6tr9iPOp0",
+        authDomain: "shoplist-ee208.firebaseapp.com",
+        databaseURL: "https://shoplist-ee208.firebaseio.com",
+        projectId: "shoplist-ee208",
+        storageBucket: "shoplist-ee208.appspot.com",
+        messagingSenderId: "47295770360",
+        appId: "1:47295770360:web:26484ccc456656bbb0150d",
+        measurementId: "G-QKW1E6ZD1V"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
+
+<body>
+    <div class="main-grid" id="main-grid">
+        <div class="topper">じゃんけん</div>
+        <div class='navi-block'> <a href="list3.html"><img src="list.png"></a> <a href="funmoney.html"><img
+                    src="fun.png"></a> <a href="budget.html"><img src="budget.png"></a>
+            <a href="dice2.html"><img src="4.png"></a>
+        </div>
+
+
+    </div>
+    <div class='rps-grid'>
+        <div id="left-column" class='left-column'>mikey<br></div>
+        <div id='middle-column' class="middle-column"></div>
+        <div id="right-column" class='right-column'>yoko<br></div>
+        <div class="wide-row" id="wide-row"><img src="rock.png"> - <img src="paper.png"> - <img src="scissors.png">
+        </div>
+    </div>
+    <div id='main-area' class="main-area">
+    </div>
+    <div class='bottom-grid'>
+        <div id="left-bottom" class='left'>...</div>
+        <div id="right-bottom" class='right'>...</div>
+        <div class='middle-span' id='historyBlock'></div>
+        <div id="left-bottomB" class='left'></div>
+        <div id="right-bottomB" class='right'></div>
+        <div class='middle-span' id='history-bottom'></div>
+    </div>
+    <div class='login' id='login-block'>
+        <input type="text" size='25' placeholder="email" id="emailField">
+        </br>
+        <input type="password" size='25' placeholder="password" id="passField">
+        </br>
+        <button id='loginButton'>Login</button>
+    </div>
+
+    <script src="rps.js"></script>
+</body>
+
+</html>
