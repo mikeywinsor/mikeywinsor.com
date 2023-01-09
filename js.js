@@ -9,7 +9,44 @@ function pageload(){
 
 //<!-- Paintings             -->>
 //<!-- Info to Variables     -->>
+
+//<! 2023-01-09 addition >>
+
+//         (7) works added //
+
+function cumulusemission(){
+	title="Cumulus Emission";
+	specs="oil on canvas,</br>40 x 30 in, 2022";
+	loc="cumulus_emission";}
+function erosion(){
+	title="Erosion";
+	specs="oil on canvas,</br>36 x 24 in, 2022";
+	loc="erosion";}
+function fillerup(){
+	title="Filler' Up";
+	specs="oil on canvas,</br>40 x 30 in, 2022";
+	loc="filler_up";}
+function germinatori(){
+	title="Germinator I";
+	specs="oil on paper,</br>24 x 18 in, 2022";
+	loc="germinator_i";}
+function radialtropism(){
+	title="Radial Tropism";
+	specs="oil on canvas,</br>40 x 30 in, 2022";
+	loc="radial_tropism";}
+function raincheck(){
+	title="Rain Check";
+	specs="oil on canvas,</br>40 x 30 in, 2022";
+	loc="rain_check";}
+function twistandmingle(){
+	title="Twist and Mingle";
+	specs="oil on canvas,</br>40 x 30 in, 2022";
+	loc="twist_and_mingle";}
+
 //<!latest update 2021-11-04 -->>
+
+//         (18) works
+
 function sunconsumingthenight(){
 	title="Sun Consuming the Night";
 	specs="oil on canvas,</br>30 x 40 in, 2021";
@@ -18,7 +55,7 @@ function whisper(){
 	title="Whisper";
 	specs="oil on paper,</br>18 x 24 in, 2021";
 	loc="whisper";}
-	function birthofahurricane(){
+function birthofahurricane(){
 	title="Birth of a Hurricane";
 	specs="oil on paper,</br>24 x 18 in, 2021";
 	loc="birth_of_a_hurricane";}
@@ -34,7 +71,6 @@ function opensesame(){
 	title="Open Sesame";
 	specs="oil on canvas,</br>40 x 30 in, 2021";
 	loc="open_sesame";}
-
 function aholeinleadership(){
 	title="A Hole in Leadership";
 	specs="oil on paper,</br>11 x 14 in, 2021";
@@ -282,11 +318,11 @@ function anopenwindow(){
 		plantinacup,sweetsweetnectar,aspring,bedtimestory,mudflap,takenbynotus,taxes,cityonisland,elephantsatriver,
 		lasthikeofsummer,havesomemore,cleansheets,crystalballs,aplacetorest,oceanmeetearth,iceontheburn,akid,
 		coralontherocks,deepsunlight,upthere,blush,anopenwindow,headintheclouds,thegathering,seedless,
-		float,livelytime,onwardchannel,moistair,suffusingtheseed];
+		float,livelytime,onwardchannel,moistair,suffusingtheseed, birthofahurricane, niterain, sunconsumingthenight, betweenbites];
 var n = ord.length;
 var stp = [n]
   // Take values from ord (images in order) and place them in a random order into a new order in ror (random order)
-var ror = [opensesame, whisper, birthofahurricane, betweenbites, niterain, sunconsumingthenight, downthehatch];
+var ror = [fillerup, cumulusemission, germinatori, radialtropism, raincheck, erosion, twistandmingle, opensesame, whisper, downthehatch];
 var pinOrder = ror.length;
  for ( var i = 0; i < n-pinOrder; i++ ) {
     ror.push(ord.splice(Math.floor(Math.random()*ord.length),1)[0]);
