@@ -63,7 +63,7 @@ function pageLoad(){
         if (user) {
             loginBlock.style.display = 'none';
             userEmail = user.email;
-            if (userEmail == "mikeywinsor@gmail.com" || mikey@boogle.com" || userEmail == "m@boogle.com" || userEmail == "mm@boogle.com"){
+            if (userEmail == "mikeywinsor@gmail.com" || userEmail == "mikey@boogle.com" || userEmail == "m@boogle.com" || userEmail == "mm@boogle.com"){
                 playerName = "mikey"; otherPlayer = 'yoko';
             }
             if (userEmail == "yoko@boogle.com" || userEmail == "pogo@boogle.com"|| userEmail =="y@boogle.com"){
