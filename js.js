@@ -10,6 +10,50 @@ function pageload(){
 //<!-- Paintings             -->>
 //<!-- Info to Variables     -->>
 
+// 2024-05-14 
+// 10 works added
+
+function andearthspoke(){
+	title="And Earth Spoke";
+	specs="oil on canvas,</br>40 x 30 in, 2023";
+	loc="and_earth_spoke";}
+function comewithus(){
+	title="Come With Us";
+	specs="oil on canvas,</br>30 x 24 in, 2024";
+	loc="come_with_us";}
+function formingacloud(){
+	title="Forming a Cloud";
+	specs="oil on canvas,</br>18 x 24 in, 2024";
+	loc="forming_a_cloud";}		
+function sharpentheblade(){
+	title="Sharpen the Blade";
+	specs="oil on paper,</br>24 x 18 in, 2024";
+	loc="sharpen_the_blade";}
+function shipment(){
+	title="Shipment";
+	specs="oil on paper,</br>24 x 18 in, 2024";
+	loc="shipment";}
+function shred(){
+	title="Shred";
+	specs="oil on paper,</br>24 x 18 in, 2023";
+	loc="shred";}
+function sprawl(){
+	title="Sprawl";
+	specs="oil on canvas,</br>24 x 18 in, 2023";
+	loc="sprawl";}
+function turnedtoten(){
+	title="Turned to Ten";
+	specs="oil on paper,</br>24 x 18 in, 2024";
+	loc="turned_to_ten";}
+function unravellingcurtain(){
+	title="Unravelling Curtain";
+	specs="oil on canvas,</br>40 x 30 in, 2023";
+	loc="unravelling_curtain";}
+function weekendbrunch(){
+	title="Weekend Brunch";
+	specs="oil on paper,</br>24 x 18 in, 2024";
+	loc="weekend_brunch";}
+
 //<! 2023-01-09 addition >>
 
 //         (7) works added //
@@ -311,8 +355,8 @@ function anopenwindow(){
 
 //<!--    Painting Random Order         -->
 
-	ord = [march,bolt,seastroll,aholeinleadership,blinkofaneye,mixitup,petalpower,nightlife,holeinthecity,
-		enroutetobreakfast,anothersummerdone,
+	ord = [turnedtoten, sharpentheblade, weekendbrunch, formingacloud, twistandmingle, whisper, downthehatch, germinatori,
+		 march,bolt,seastroll,aholeinleadership,blinkofaneye,mixitup,petalpower,nightlife,holeinthecity, enroutetobreakfast,anothersummerdone,
 		fromthebalcony,lunarzenith,turnaleaf,waterfall,thesunandthemoon,afeast,deepinthenight,edgesofhistory,
 		gatheringclouds,onsynth,somethingemerges,itabides,happybirthday,grapplecoilandbite,eatyou,intravenous,
 		plantinacup,sweetsweetnectar,aspring,bedtimestory,mudflap,takenbynotus,taxes,cityonisland,elephantsatriver,
@@ -320,9 +364,11 @@ function anopenwindow(){
 		coralontherocks,deepsunlight,upthere,blush,anopenwindow,headintheclouds,thegathering,seedless,
 		float,livelytime,onwardchannel,moistair,suffusingtheseed, birthofahurricane, niterain, sunconsumingthenight, betweenbites];
 var n = ord.length;
+
 var stp = [n]
+
   // Take values from ord (images in order) and place them in a random order into a new order in ror (random order)
-var ror = [fillerup, cumulusemission, germinatori, radialtropism, raincheck, erosion, twistandmingle, opensesame, whisper, downthehatch];
+var ror = [andearthspoke, comewithus, sprawl, cumulusemission, shipment, unravellingcurtain, fillerup, shred, radialtropism, raincheck, erosion, opensesame];
 var pinOrder = ror.length;
  for ( var i = 0; i < n-pinOrder; i++ ) {
     ror.push(ord.splice(Math.floor(Math.random()*ord.length),1)[0]);
