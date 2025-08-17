@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>FUKU MONI</title>
+<style type="text/css">
+body {
+	background-color: #FAE2D3;
+}
+</style>
+</head>
+<style>
+    .topGrid {
+        display: grid;
+        grid-template-columns: 20% 20% 20% 40%;
+        background-color:#660;
+		border:double;
+        padding: 10px;
+
+    }
+
+    .pageName {
+        grid-column: 1/3;
+        display: inline-block;
+        text-align: center;
+        padding: 10px;
+        background-color:#693;
+        border-width: thick;
+        border: thistle;
+        border-style: solid;
+        border-bottom: gainsboro;
+        font-size: 22px;
+        color:#039;
+    }
+
+    .navi-block {
+        grid-column: 3/5;
+        display: inline-block;
+        text-align: right;
+        padding: 10px;
+    }
+
+	.bals{
+		display: inline-grid;
+		grid-template-columns: 20% 30% 20% 30%;
+		padding:2px;
+		border:dotted;
+		}
+
+    .budget-add-m {
+        background-color: lightgray;
+        padding: 5px;
+        border-style: solid;
+        border-color:#FF9D9D ;
+        align-items: center;
+        display:inline-block;
+        margin: auto;
+    }
+
+    .budget-balance-m {
+        text-align: center;
+        background-color: honeydew;
+        border-width: thick;
+        border-color:#FF9D9D;
+        border-style: solid;
+        padding: 5px;
+        font-size: 15px;
+        color: slategray;
+        display:inline-block;
+    }
+	.budget-add-y {
+        background-color: lightgray;
+        padding: 5px;
+        border-style: solid;
+        border-color:#FF9D9D ;
+        align-items: center;
+        display:inline-block;
+        margin: auto;
+    }
+    .budget-balance-y {
+        text-align: center;
+        background-color: honeydew;
+        border-width: thick;
+        border-color:#FF9D9D;
+        border-style: solid;
+        padding: 5px;
+        font-size: 15px;
+        color: slategray;
+        display:inline-block;
+    }
+
+
+    .input-bar {
+	    display: grid;
+  		grid-template-columns: 33% 33% 33%;
+        padding: 4px;
+        border-style: dotted;
+        border-color: thistle;
+    }
+	
+	.input-bar > div {
+	  background-color: #f1f1f1;
+	  border: 1px solid black;
+	  padding: 4px;
+	  font-size: 22px;
+  	  text-align: center;
+}
+
+    .history-priceM {
+	background-color: floralwhite;
+	display: inline-block;
+	padding: 5px;
+	border-width: thin;
+	border: thistle;
+	border-style: solid;
+	text-align: right;
+	color: lightslategray;
+	font-size: 15px;
+	padding: 5px;
+	outline-color: #999;
+    }
+
+    .history-placeM {
+	border-width: thin;
+	border: grey;
+	border-style: solid;
+	font-size: 18px;
+	color: #FCF;
+	background-color: cornsilk;
+	text-align: center;
+	display: inline-block;
+	text-align: left;
+	padding: 5px;
+    }
+	
+	    .history-priceY {
+	background-color: floralwhite;
+	display: inline-block;
+	padding: 5px;
+	border-width: thin;
+	border: thistle;
+	border-style: solid;
+	text-align: right;
+	color: lightslategray;
+	font-size: 15px;
+	padding: 5px;
+	outline-color: #999;
+    }
+
+    .history-placeY {
+	border-width: thin;
+	border: grey;
+	border-style: solid;
+	font-size: 18px;
+	color: #FCF;
+	background-color: cornsilk;
+	text-align: center;
+	display: inline-block;
+	text-align: left;
+	padding: 5px;
+    }
+
+    .bottom-arrow {
+        grid-column: 1/5;
+        grid-row: 5;
+        text-align: center;
+        display: block;
+        margin: auto;
+    }
+</style>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyA4FOGL6w5-Ih-Lf8LBlHLnzP6tr9iPOp0",
+        authDomain: "shoplist-ee208.firebaseapp.com",
+        databaseURL: "https://shoplist-ee208.firebaseio.com",
+        projectId: "shoplist-ee208",
+        storageBucket: "shoplist-ee208.appspot.com",
+        messagingSenderId: "47295770360",
+        appId: "1:47295770360:web:26484ccc456656bbb0150d",
+        measurementId: "G-QKW1E6ZD1V"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
+
+<body>
+    <div class='topGrid'>
+        <div class='pageName'>Fuku Moni</div>
+        <div class='navi-block'><a href="budget.html"><img src="budget.png"></a><a href="list3.html"><img src="list.png"></a> <a href="rps.html"><img height='32px'
+                    src="scissors.png"></a> <a href="funmoney.html"><img src="fun.png"></a> <a href="dice2.html"><img
+                    src="5.png"></a></div>
+        </div>
+</div>
+<div id='loginBlock' style='display:none'>
+        <input type="text" size='25' placeholder="email" id="emailField">
+        </br>
+        <input type="password" size='25' placeholder="password" id="passField">
+        </br>
+  <button id='loginButton'>Login</button>
+</div>
+</div>        
+<div class="input-bar" id='inputTransactionBlock'>
+			<div id='whoPlaceholder'></div>
+            <div><img src="backspace.png" onclick="backspace()"></div>
+            <div><img src="x.png" onclick="hitX()"></div>
+            <div onclick="numPadOne()">_1_</div>
+            <div onclick="numPadTwo()">_2_</div>
+            <div onclick="numPadThree()">_3_</div>
+            <div onclick="numPadFour()">_4_</div>
+            <div onclick="numPadFive()">_5_</div>
+            <div onclick="numPadSix()">_6_</div>
+            <div onclick="numPadSeven()">_7_</div>
+            <div onclick="numPadEight()">_8_</div>
+            <div onclick="numPadNine()">_9_</div>
+            <div></div>
+            <div onclick="numPadZero()">_0_</div>
+            <div></div>
+            <div onclick="emojiShirt()">&#128085</div>
+            <div onclick="emojiPants()">&#128086</div>
+            <div onclick="emojiDress()">&#128087</div>
+            <div onclick="emojiShoes()">&#128095</div>
+            <div onclick="emojiSocks()">&#129510</div>
+            <div onclick="emojiCoat()">&#129509</div>
+            <div onclick="emojiSunglasses()">&#128083</div>
+            <div onclick="emojiBag()">&#128092</div>
+            <div onclick="emojiBike()">&#128692</div>
+            
+                        
+           <input id='inputTransactionPrice' type="text" placeholder="amount" size="7">
+           <div id='inputTransactionPlace' size="10"></div>
+           <button id='addTransactionButton' onclick="transactionSubmit()">Add + </button>
+</div>
+               
+        
+                 
+<div class='bals'>
+<div class='budget-add-m' style="flex: auto;"><img src="plus.png" onclick="clickAddM()"></div><div class='budget-balance-m' id='mBalance'>mikey amount</div><div class='budget-add-y' style="flex: auto;"><img src="plus.png" onclick="clickAddY()"></div><div class='budget-balance-y' id='yBalance'>yoko amount</div>
+
+        <div id="historyPricesM" class='history-price'>-_-</div>
+        <div id="historyPlacesM" class='history-place'>-_-</div>
+        <div id="historyPricesY" class='history-price'>-_-</div>
+        <div id="historyPlacesY" class='history-place'>-_-</div>
+
+     
+
+
+      
+    </div>
+    <div class='mainGrid'>
+        <div class='vaca-left'></div>
+        <div class='vaca-right' id="vacationAmount"></div>
+
+
+    <script src="fukumoni.js"></script>
+</body>
+
+</html>
