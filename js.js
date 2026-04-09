@@ -9,6 +9,30 @@ function pageload(){
 
 //<!-- Paintings             -->>
 //<!-- Info to Variables     -->>
+//2026-04-09 5 works added
+
+function allin(){
+	title="All In";
+	specs="acrylic on canvas,</br>30 x 40 in, 2026";
+	loc="all_in";}
+function everybodyout(){
+	title="Everybody Out";
+	specs="acrylic on canvas,</br>30 x 40 in, 2026";
+	loc="everybody_out";}
+function begin(){
+	title="Begin";
+	specs="acrylic on paper,</br>16 x 20 in, 2026";
+	loc="begin";}
+function clicktockboom(){
+	title="Click, Tock, Boom";
+	specs="acrylic on canvas,</br>64 x 88 in, 2026";
+	loc="click_tock_boom";}
+function holdtogether(){
+	title="Hold Together";
+	specs="oil on canvas,</br>48 x 30 in, 2026";
+	loc="hold_together";}
+
+
 
 // 2024-05-14 
 // 10 works added
@@ -355,7 +379,7 @@ function anopenwindow(){
 
 //<!--    Painting Random Order         -->
 
-	ord = [turnedtoten, sharpentheblade, weekendbrunch, formingacloud, twistandmingle, whisper, downthehatch, germinatori,
+	ord = [allin, everybodyout, begin, clicktockboom, holdtogether, turnedtoten, sharpentheblade, weekendbrunch, formingacloud, twistandmingle, whisper, downthehatch, germinatori,
 		 march,bolt,seastroll,aholeinleadership,blinkofaneye,mixitup,petalpower,nightlife,holeinthecity, enroutetobreakfast,anothersummerdone,
 		fromthebalcony,lunarzenith,turnaleaf,waterfall,thesunandthemoon,afeast,deepinthenight,edgesofhistory,
 		gatheringclouds,onsynth,somethingemerges,itabides,happybirthday,grapplecoilandbite,eatyou,intravenous,
@@ -368,7 +392,7 @@ var n = ord.length;
 var stp = [n]
 
   // Take values from ord (images in order) and place them in a random order into a new order in ror (random order)
-var ror = [andearthspoke, comewithus, sprawl, cumulusemission, shipment, unravellingcurtain, fillerup, shred, radialtropism, raincheck, erosion, opensesame];
+var ror = [allin, clicktockboom, everybodyout, begin, holdtogether, andearthspoke, comewithus, sprawl, cumulusemission, shipment, unravellingcurtain, fillerup, shred, radialtropism, raincheck, erosion, opensesame];
 var pinOrder = ror.length;
  for ( var i = 0; i < n-pinOrder; i++ ) {
     ror.push(ord.splice(Math.floor(Math.random()*ord.length),1)[0]);
