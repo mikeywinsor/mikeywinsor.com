@@ -26,8 +26,9 @@ let transEmoji = "";
 let newAddition = "";
 
 let mBudgetRemaining = 0;
+let mNewBal = "0";
 let yBudgetRemaining = 0;
-
+let yNewBal = "0";
 
 let historyLengthM = 0;
 let historyPositionM = 0;
@@ -115,11 +116,11 @@ function paydayPoutout() {
 
 function loadBalances(){
     let mikeybalance = allData["mikey"];
-    mBudgetRemaining = (Math.round(mikeybalance * 100) / 100).toFixed(2)
+    mBudgetRemaining = mikeybalance
     //console.log(mBudgetRemaining);
     //mBalance.innerText = 'Mikey $' + mBudgetRemaining;
     let yokobalance = allData["yoko"];
-    yBudgetRemaining = (Math.round(yokobalance * 100) / 100).toFixed(2)
+    yBudgetRemaining = yokobalance
     //yBalance.innerText = 'Yoko $' + (Math.round(yokobalance * 100) / 100).toFixed(2);
     historyLengthM = allData['mhistory'].length;
     historyLengthY = allData['yhistory'].length;
@@ -156,7 +157,7 @@ function printHistory(m,y){
         historyPlacesM.innerHTML += `<p>$${price} ${place}</p>`;
         //historyPlacesM.innerHTML += smallSpace;
         historyPricesM.innerHTML += smallSpace;
-        mBudgetRemaining -= price;
+ //       mBudgetRemaining -= price;
         //console.log(mBudgetRemaining + "   price subtracted =" + price + "  place:" + place);
         i++;
         historyPositionM++;
@@ -170,7 +171,7 @@ function printHistory(m,y){
         historyPlacesY.innerHTML += `<p>$${price} ${place}</p>`;
         //historyPlacesY.innerHTML += smallSpace;
         historyPricesY.innerHTML += smallSpace;
-        yBudgetRemaining -= price;
+  //      yBudgetRemaining -= price;
         i++;
         historyPositionY++;
     }
@@ -344,17 +345,25 @@ function transactionSubmit(){
     newAddition = transStringNumber + "," + transEmoji;
 
     if (activeAddWho == "m"){
-        allData['mhistory'].unshift(newAddition)
+        
+        mNewBal = parseInt(mBudgetRemaining) - parseInt(transStringNumber);
+
+        allData['mhistory'].unshift(newAddition);
         docRef.set({
-        mhistory : allData['mhistory']
+        mhistory : allData['mhistory'],
+        mikey : mNewBal,
     }, { merge: true }
     );
     }
 
     if(activeAddWho == "y"){
-        allData['yhistory'].unshift(newAddition)
+
+        yNewBal = parseInt(yBudgetRemaining) - parseInt(transStringNumber);
+
+        allData['yhistory'].unshift(newAddition);
         docRef.set({
-        yhistory : allData['yhistory']
+        yhistory : allData['yhistory'],
+        yoko : yNewBal,
     }, { merge: true }
     );
     }
